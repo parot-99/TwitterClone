@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "c:\\Users\\ahmud\\Desktop\\Ahmad\\Projects\\django-env\\Scripts\\python.exe",
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/migrations": true
+    }    
+}
+

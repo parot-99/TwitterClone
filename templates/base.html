@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TweetMe</title>
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/variables.css' %}">
+
+    {% block head %}
+    {% endblock head %}
+
+</head>
+<body>
+<header id="main-header">
+    <div class="container flexed">
+    <a href="{% url 'home' %}"><h1>Tweetme</h1></a>      
+    <ul class="flexed nav-bar">
+        <li><a href="{% url 'home' %}" class="nav-btn ">Home</a></li>
+    </ul>     
+    </div>
+</header>
+<body>
+    <main id="page-container" class="container ">
+
+        {% block body %}
+        {% endblock body %}
+
+    </main>
+
+    {% block scripts %}
+    {% endblock scripts %}
+         
+</body>
+</html>
