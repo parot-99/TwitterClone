@@ -22,7 +22,6 @@ ul {
 
 #page-container {
   min-height: 100vh;
-  margin-bottom: 5rem;
   margin-top: 7.5rem;
 }
 
@@ -76,4 +75,42 @@ ul {
 #main-header .container a h1 {
   color: var(--main-color);
   font-weight: bolder;
+}
+
+@media screen and (max-width: 1100px) {
+  /* #home-container {
+    margin-top: 0;
+  }
+
+  #page-container {
+    margin-top: 2.5rem;
+  } */
+
+  .container {
+    max-width: 100%;
+  }
+
+  /* #main-header {
+    position: relative;
+    height: fit-content;
+  }
+
+  #main-header .flexed {
+    flex-direction: column;
+  }
+
+  #main-header .flexed ul {
+    width: 100%;
+  }
+
+  #main-header .flexed li {
+    width: 100%;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+
+  .nav-btn {
+    padding: 0.5rem 5rem;  
+  
+  } */
 }

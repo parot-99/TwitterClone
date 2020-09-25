@@ -2,14 +2,25 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'tweets/styles/tweet.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/form.css' %}">
+  <link rel="stylesheet" href="{% static 'tweets/styles/tweet.css' %}">
 {% endblock head %}
 
 {% block body %}
-    <main id="tweets-container">
-    </main>
+  <form method="POST" id="tweet-create-form" class="form-container">
+  {% csrf_token %}
+    <div class="form-item">
+      <label for="id_content">Content: </label>
+      {{ form.content }}
+    </div>
+    <div class="form-item">
+      <button type="submit" class="prim-btn">Save</button>
+    </div>
+  </form>
+  <main id="tweets-container">
+  </main>
 {% endblock body %}
 
 {% block scripts %}
-    <script src="{% static 'scripts/base.js' %}"></script>
+  <script src="{% static 'scripts/base.js' %}"></script>
 {% endblock scripts %}
