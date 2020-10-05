@@ -3,15 +3,15 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'styles/form.css' %}">
-  <link rel="stylesheet" href="{% static 'tweets/styles/tweet.css' %}">
+  <link rel="stylesheet" href="{% static 'react/styles/tweet.css' %}">
 {% endblock head %}
 
 {% block body %}
-  <form method="POST" id="tweet-create-form" class="form-container">
+  <form method="POST" action="api/tweets/create" id="tweet-create-form" class="form-container">
   {% csrf_token %}
     <div class="form-item">
       <label for="id_content">Content: </label>
-      {{ form.content }}
+      <textarea name="content" id="id_content" cols="50" rows="7" placeholder="Your tweet..."></textarea>
     </div>
     <div class="form-item">
       <button type="submit" class="prim-btn">Save</button>
