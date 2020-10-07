@@ -58,7 +58,7 @@ tweetCreateForm.addEventListener('submit', (event) => {
 
 const loadTweets = (tweetElement) => {
     let tweets = ''
-    const url = 'http://127.0.0.1:8000/api/tweets/'
+    const url = '/api/tweets/'
     const request = {
         method: 'get',
         headers: {
@@ -102,10 +102,10 @@ function retweetBtn(tweet) {
 
 
 const handleActionBtn = (tweetId, actionType) => {
-    let url = `http://127.0.0.1:8000/api/tweets/${tweetId}/like`
+    let url = `/api/tweets/${tweetId}/like/`
 
     if(actionType === 'retweet') {
-        url = `http://127.0.0.1:8000/api/tweets/${tweetId}/retweet`
+        url = `/api/tweets/${tweetId}/retweet/`
     }
 
     const method = 'POST'
@@ -119,7 +119,7 @@ const handleActionBtn = (tweetId, actionType) => {
     
     fetch(url, request)
         .then(response => {
-            if(response.status === 200) {
+            if(response.status === 201) {
                 return response.json()
             }
 
@@ -127,6 +127,6 @@ const handleActionBtn = (tweetId, actionType) => {
                 throw new Error('Tweet not found')
             }
         })
-        .then(data => loadTweets(tweetElement))
+        .then(() => loadTweets(tweetElement))
         .catch(error => alert(error))
 }

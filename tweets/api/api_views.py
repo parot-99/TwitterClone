@@ -89,7 +89,7 @@ def tweet_retweet_view(request, tweet_id):
     parent = tweet.first()
     retweet = Tweet.objects.create(user=request.user, retweet=parent)
 
-    return Response({}, status=status.HTTP_200_OK)
+    return Response({}, status=status.HTTP_201_CREATED)
 
 
 

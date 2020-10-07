@@ -10,9 +10,9 @@ from .api.api_views import (
 
 urlpatterns = [
     path('', tweet_list_view, name='tweets'),
-    path('create', tweet_create_view, name='create-tweet'),
+    path('create/', tweet_create_view, name='create-tweet'),
     path('<int:tweet_id>/', tweet_detail_view, name='tweet'), 
-    path('<int:tweet_id>/delete', tweet_delete_view, name='delete-tweet'),
-    path('<int:tweet_id>/like', tweet_like_view, name='like-tweet'),
-    path('<int:tweet_id>/retweet', tweet_retweet_view, name='retweet-tweet'),
+    path('<int:tweet_id>/delete/', tweet_delete_view, name='delete-tweet'),
+    path('<int:tweet_id>/like/', tweet_like_view, name='like-tweet'),
+    path('<int:tweet_id>/retweet/', tweet_retweet_view, name='retweet-tweet'),
 ]
