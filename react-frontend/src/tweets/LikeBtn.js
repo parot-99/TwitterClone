@@ -9,7 +9,6 @@ const LikeBtn = (props) => {
 			method: 'POST',
 			headers: {
 					'X-CSRFToken': getCSRF('csrftoken'),
-					'X-Requested-With': 'XMLHttpRequest'
 			},
 		}
 

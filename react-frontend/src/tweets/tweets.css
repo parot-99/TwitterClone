@@ -1,8 +1,17 @@
+#tweets-container {
+  max-width: 100%;
+ 
+}
+
 .tweet-container {
-  margin: 1rem 0;
+  max-width: 50%;
+  margin: auto;
   padding: 1rem 0.5rem;
   border: 1px solid var(--border-color);
-  border-radius: 5px;
+}
+
+.tweet-container:first-child {
+  border-top: 1.5rem solid var(--border-color);
 }
   
 .tweet-container-item {
@@ -11,11 +20,10 @@
 }
 
 .form-container {
-  max-width: 100%;
+  max-width: 50%;
   margin: auto;
   padding: 1rem;
   border: 1px solid var(--border-color);
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,10 +35,12 @@
   text-align: center;
 }
 
-.form-container .form-item:not(:last-child) input {
+.form-container .form-item:not(:last-child) input, textarea {
   padding: 0.5rem;
-  color: #000000;
+  color: var(--input-color);
   border-radius: 5px;
+  resize: none;
+  outline: none;
 }
 
 .form-item label {
@@ -38,11 +48,15 @@
   padding-bottom: 0.5rem;
 }
 
-#id_content {
-  padding: 0.5rem;
-  resize: none;
-  border-radius: 5px;
-  color: var(--input-color);
+.message {
+  text-align: center;
 }
+
+@media screen and (max-width: 1000px) {
+  .tweet-container, .form-container {
+    max-width: 100%;
+  }
+}
+
 
   

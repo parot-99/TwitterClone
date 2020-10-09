@@ -47,7 +47,6 @@ def tweet_delete_view(request, tweet_id):
 def tweet_list_view(request):
     tweets = Tweet.objects.all().order_by('-date_created')
     serializer = TweetSerializer(tweets, many=True)
-    
     return Response(serializer.data)
 
 

@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import home_view
+from .views import react_view
   
 
 urlpatterns = [
-   path('', home_view, name='home'), 
+   path('', react_view, name='react'), 
 ]

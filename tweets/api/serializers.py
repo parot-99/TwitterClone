@@ -11,7 +11,7 @@ class TweetCreateSerializer(serializers.ModelSerializer):
             'content', 
             'likes'
         ]
-
+    
     def validate_content(self, value):
         if len(value) > settings.MAX_TWEET_LENGTH:
             raise  serializers.ValidationError('This tweet is too long')
@@ -22,7 +22,7 @@ class TweetCreateSerializer(serializers.ModelSerializer):
 class TweetSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField(read_only=True)
     retweet = TweetCreateSerializer(read_only=True)
-
+    
     class Meta:
         model = Tweet
         fields = [

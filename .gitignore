@@ -4,6 +4,7 @@ settings.py
 db.sqlite3
 node_modules/
 debug.log
+settings-clone.py
 
 # nodejs
 

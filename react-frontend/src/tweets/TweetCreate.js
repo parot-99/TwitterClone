@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import getCSRF from './../getCSRF'
 
+
 const TweetCreate = () => {
   const [error, setError] = useState(false)
   const csrftoken = getCSRF('csrftoken')
@@ -15,7 +16,6 @@ const TweetCreate = () => {
       method: 'POST',
       headers: {
         'X-CSRFToken': csrftoken,
-        'X-Requested-With': 'XMLHttpRequest'
       },
       body: myFormData
     }
@@ -50,7 +50,7 @@ const TweetCreate = () => {
       <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken}></input>
       <div className="form-item">
         <label htmlFor="id_content">Content: </label>
-        <textarea name="content" id="id_content" cols="50" rows="7" placeholder="Your tweet..."></textarea>
+        <textarea name="content" id="id_content" cols="50" rows="7" placeholder="Your tweet..." required={true}></textarea>
       </div>
       {error && <div className="form-item">Error</div>}
       <div className="form-item">

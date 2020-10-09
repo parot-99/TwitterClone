@@ -9,15 +9,12 @@ function App() {
   return (
     <React.Fragment>
       <Navbar />
-      <main id="page-container" className="container ">
-        <Tweets>
-          <h1>Hola</h1>
-        </Tweets>
+      <main id="page-container">
+        <Tweets />
       </main>
     </React.Fragment>  
   )
 }
-
 
 
 export default App;
