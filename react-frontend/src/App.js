@@ -1,18 +1,20 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './App.css';
 import './variables.css'
 import Navbar from './base/Navbar';
 import Tweets from './tweets/Tweets'
+import Base from './base/Base'
 
 
 function App() {
   return (
-    <React.Fragment>
+    <Fragment>
       <Navbar />
       <main id="page-container">
         <Tweets />
       </main>
-    </React.Fragment>  
+    </Fragment>
+    //<Base />  
   )
 }
 

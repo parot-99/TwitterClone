@@ -8,6 +8,7 @@ const Tweets = () => {
   const [tweets, setTweets] = useState([])
   const [error, setError] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isTweetAdded, setIsTweetAdded] = useState(false)
 
   useEffect(() => {
     const url = 'http://127.0.0.1:8000/api/tweets/'
@@ -36,11 +37,15 @@ const Tweets = () => {
           setError(true)
         }
       )
-    }, []) 
+    }, [])
+    
+    const onFormPost = () => {
+      !isTweetAdded? setIsTweetAdded(true): setIsTweetAdded(false)
+    }
     
   return (
     <React.Fragment>
-      <TweetCreate />
+      <TweetCreate onFormPost={onFormPost} />
       {!isLoaded && <h1 className="message">Loading</h1>}
       {error && <h1 className="message">Error</h1>}
       {!error && <TweetList tweets={tweets} />}

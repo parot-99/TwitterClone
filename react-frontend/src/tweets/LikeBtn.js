@@ -1,21 +1,23 @@
-import React from 'react'
-import getCSRF from './../getCSRF'
+import React, {useState} from 'react'
+import getCookie from '../getCookie'
 
 
 const LikeBtn = (props) => {
+	const [likes, setLikes] = useState(props.tweetLikes)
+
 	const handleLike = (tweetId) => {
 		const url = `http://127.0.0.1:8000/api/tweets/${tweetId}/like/`
 		const request = {
 			method: 'POST',
 			headers: {
-					'X-CSRFToken': getCSRF('csrftoken'),
+					'X-CSRFToken': getCookie('csrftoken'),
 			},
 		}
 
 		fetch(url, request)
 			.then(response => {
 				if(response.status === 200) {
-					alert('ok')
+					return response.json()
 				}
 
 				if(response.status === 403) {
@@ -24,7 +26,9 @@ const LikeBtn = (props) => {
 
 			})
 			.then(
-				() => {}, 
+				(data) => {
+					data.type==='like'? setLikes(likes+ 1): setLikes(likes- 1) 
+				}, 
 				(error) => {
 					alert(error)
 				}
@@ -33,7 +37,7 @@ const LikeBtn = (props) => {
 
   return (
     <button onClick={() => handleLike(props.tweetId)} className="prim-btn tweet-container-item cursor">
-      {props.tweetLikes} likes
+      {likes} likes
     </button>
   )
 }

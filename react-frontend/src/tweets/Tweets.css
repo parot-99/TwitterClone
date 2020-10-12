@@ -43,8 +43,14 @@
   outline: none;
 }
 
+.form-container .form-item:not(:last-child) input:focus, textarea:focus {
+  /* outline: 1px solid blue; */
+  box-shadow: 0 0 5pt 4pt var(--input-shadow-color);
+}
+
 .form-item label {
   display: block;
+  font-weight: bold;
   padding-bottom: 0.5rem;
 }
 

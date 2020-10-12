@@ -41,6 +41,3 @@ class TweetSerializer(serializers.ModelSerializer):
             return obj.retweet.content
 
         return obj.content
-
-
-

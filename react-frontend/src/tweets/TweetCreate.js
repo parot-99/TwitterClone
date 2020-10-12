@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
-import getCSRF from './../getCSRF'
+import getCookie from '../getCookie'
+import Message from './../messages/Message'
 
 
-const TweetCreate = () => {
+const TweetCreate = (props) => {
   const [error, setError] = useState(false)
-  const csrftoken = getCSRF('csrftoken')
+  const [errorMsg, setErrorMsg] = useState(null)
+  const csrftoken = getCookie('csrftoken')
 
   const handleTweet = (event) => {
     event.preventDefault()
@@ -16,6 +18,8 @@ const TweetCreate = () => {
       method: 'POST',
       headers: {
         'X-CSRFToken': csrftoken,
+        'X-Requested-With': 'XMLHttpRequest', 
+        'Content-Type': "application/json", 
       },
       body: myFormData
     }
@@ -23,36 +27,38 @@ const TweetCreate = () => {
     fetch(url, request)
       .then(response => {
         if(response.status === 201) {
-            return response.json()
+          return response.json()
         }
 
         if(response.status === 400) {
-            throw new Error('Try a shorter tweet')
+          throw new Error('Try a shorter tweet')
         }
 
         if(response.status === 403) {
-            throw new Error('Login first to perform this action')
+          throw new Error('Login first to perform this action')
         }        
       })
       .then(
         () => {
           myForm.reset()
+          // props.onFormPost()
         }, 
         (error) => {
           myForm.reset()
           setError(true)
+          setErrorMsg(error.message)
         } 
       )  
   }
  
   return (
     <form onSubmit={(event) => handleTweet(event)} method="POST" action="api/tweets/create" id="tweet-create-form" className="form-container">
-      <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken}></input>
+      <input value={csrftoken} type="hidden" name="csrfmiddlewaretoken" ></input>
       <div className="form-item">
         <label htmlFor="id_content">Content: </label>
         <textarea name="content" id="id_content" cols="50" rows="7" placeholder="Your tweet..." required={true}></textarea>
       </div>
-      {error && <div className="form-item">Error</div>}
+      {error && <div className="form-item">{<Message propClass='failure' message={errorMsg} />}</div>}
       <div className="form-item">
         <button type="submit" className="prim-btn cursor">Tweet</button>
       </div>
