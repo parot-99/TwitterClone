@@ -13,8 +13,8 @@ const TweetList = (props) => {
             {tweet.is_retweet && tweet.retweet.content}
             {!tweet.is_retweet && tweet.content}
           </h3>
-          <LikeBtn tweetId={tweet.id} tweetLikes={tweet.likes} />
-          <Retweetbtn />
+          <LikeBtn tweetId={tweet.id} tweetLikes={tweet.likes} isLiked={tweet.isLiked} />
+          <Retweetbtn tweetId={tweet.id} />
         </article>
       ))}   
     </section>

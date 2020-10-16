@@ -1,17 +1,17 @@
 import React, {useState} from 'react'
-import getCookie from '../getCookie'
 
 
 const LikeBtn = (props) => {
-	const [likes, setLikes] = useState(props.tweetLikes)
+  const [likes, setLikes] = useState(props.tweetLikes)
+  const [isLiked, setIsLiked] = useState(props.isLiked)
 
 	const handleLike = (tweetId) => {
 		const url = `http://127.0.0.1:8000/api/tweets/${tweetId}/like/`
 		const request = {
 			method: 'POST',
 			headers: {
-					'X-CSRFToken': getCookie('csrftoken'),
-			},
+				Authorization: `Bearer ${localStorage.getItem('token')}`
+      }   
 		}
 
 		fetch(url, request)
@@ -20,24 +20,23 @@ const LikeBtn = (props) => {
 					return response.json()
 				}
 
-				if(response.status === 403) {
+				if(response.status === 401) {
 					throw new Error('Login first to perform this action')
 				}
-
 			})
-			.then(
-				(data) => {
-					data.type==='like'? setLikes(likes+ 1): setLikes(likes- 1) 
-				}, 
-				(error) => {
-					alert(error)
-				}
-			)
+			.then((data) => {
+        data.type==='like'? setLikes(likes+ 1): setLikes(likes- 1) 
+        data.type==='like'? setIsLiked(true): setIsLiked(false) 
+      })
+			.catch(error => {
+        alert(error)
+      })
 	}
 
   return (
     <button onClick={() => handleLike(props.tweetId)} className="prim-btn tweet-container-item cursor">
-      {likes} likes
+      {!isLiked && likes + ' likes'} 
+      {isLiked && likes + ' liked'} 
     </button>
   )
 }

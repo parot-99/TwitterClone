@@ -17,7 +17,8 @@ const Tweets = () => {
       headers: {
         'X-Requested-With': 'XMLHttpRequest', 
         'Content-Type': "application/json", 
-        'Accept': "application/json"
+        'Accept': "application/json",
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     }
 
@@ -27,25 +28,23 @@ const Tweets = () => {
           return response.json()
         }
       })
-      .then(
-        (data) => {
-          setIsLoaded(true)
-          setTweets(data)
-        },
-        (error) => {
-          setIsLoaded(true)
-          setError(true)
-        }
-      )
-    }, [])
+      .then(data => {
+        setIsLoaded(true)
+        setTweets(data)
+      })
+      .catch(error => {
+        setError(true)
+        console.log(error);
+      })
+    }, [isTweetAdded])
     
-    const onFormPost = () => {
-      !isTweetAdded? setIsTweetAdded(true): setIsTweetAdded(false)
+    const onTweetAdd = () => {
+      setIsTweetAdded(!isTweetAdded)
     }
     
   return (
     <React.Fragment>
-      <TweetCreate onFormPost={onFormPost} />
+      <TweetCreate onTweetAdd={onTweetAdd} />
       {!isLoaded && <h1 className="message">Loading</h1>}
       {error && <h1 className="message">Error</h1>}
       {!error && <TweetList tweets={tweets} />}

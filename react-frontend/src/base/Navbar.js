@@ -1,14 +1,18 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+import Logout from './Logout'
 
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <header id="main-header">
       <div className="container flexed">
-        <h1 className="cursor clicked">TweetMe</h1>
+        <Link to='/'><h1 className="cursor clicked">TwitterClone</h1></Link>
         <nav className="nav-bar flexed">
-          <h3 className="nav-btn cursor clicked">Home</h3>  
-          <h3 className="nav-btn cursor clicked">Contact</h3>  
+          <Link to='/home'><h3 className="nav-btn cursor clicked">Home</h3></Link>
+          <Link to='#'><h3 className="nav-btn cursor clicked">Contact</h3></Link>
+          {!props.isAuthenticated && <Link to='/Login'><h3 className="nav-btn cursor clicked">Login</h3></Link>}
+          {props.isAuthenticated && <Logout />}  
         </nav>     
       </div>
     </header>

@@ -8,8 +8,8 @@ class TweetCreateSerializer(serializers.ModelSerializer):
         model = Tweet
         fields = [
             'id',
-            'content', 
-            'likes'
+            'content',
+            'likes'     
         ]
     
     def validate_content(self, value):
@@ -35,9 +35,3 @@ class TweetSerializer(serializers.ModelSerializer):
 
     def get_likes(self, obj):
         return obj.likes.count()
-
-    def get_content(self, obj):
-        if obj.is_retweet:
-            return obj.retweet.content
-
-        return obj.content

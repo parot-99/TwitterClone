@@ -6,7 +6,6 @@ from .api.api_views import (
     tweet_delete_view,
     tweet_like_view, 
     tweet_retweet_view,
-    login_view
 )
 
 urlpatterns = [
@@ -16,5 +15,4 @@ urlpatterns = [
     path('<int:tweet_id>/delete/', tweet_delete_view, name='delete-tweet'),
     path('<int:tweet_id>/like/', tweet_like_view, name='like-tweet'),
     path('<int:tweet_id>/retweet/', tweet_retweet_view, name='retweet-tweet'),
-    path('login/', login_view, name='login'),
 ]
