@@ -4,10 +4,10 @@ from rest_framework import routers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include('profiles.urls')),
     path('', include('react.urls')), 
+    path('api/auth/', include('authentication.urls')),
     path('api/tweets/', include('tweets.urls')), 
-    path('api/profiles/', include('profiles.urls'))
+    path('api/profiles/', include('profiles.urls')),
 ]
 
 from django.conf import settings

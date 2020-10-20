@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
+import AuthContext from './../utilities/AuthContext'
 import Logout from './Logout'
 
 
-const Navbar = (props) => {
+const Navbar = () => {
+  const {isAuthenticated} = useContext(AuthContext)
+  
   return (
     <header id="main-header">
       <div className="container flexed">
@@ -11,8 +14,8 @@ const Navbar = (props) => {
         <nav className="nav-bar flexed">
           <Link to='/home'><h3 className="nav-btn cursor clicked">Home</h3></Link>
           <Link to='#'><h3 className="nav-btn cursor clicked">Contact</h3></Link>
-          {!props.isAuthenticated && <Link to='/Login'><h3 className="nav-btn cursor clicked">Login</h3></Link>}
-          {props.isAuthenticated && <Logout />}  
+          {!isAuthenticated && <Link to='/auth/Login'><h3 className="nav-btn cursor clicked">Login</h3></Link>}
+          {isAuthenticated && <Logout />}  
         </nav>     
       </div>
     </header>

@@ -1,15 +1,23 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import './Base.css'
+import Login from './Login'
+import Register from './Register'
+import Navbar from './Navbar'
 
 
 const Base = () => {
   return (
-    <main id="welcome">
-      <div id="join-us">     
-        <Link to='/login'><h1 >Join Us</h1></Link>
-      </div>
-    </main>
+    <Switch>
+      <Route path='/auth/login'>
+        <Navbar />
+        <Login />
+      </Route>
+      <Route path='/auth/register'>
+        <Navbar />
+        <Register />    
+      </Route>
+    </Switch>    
   )
 }
 

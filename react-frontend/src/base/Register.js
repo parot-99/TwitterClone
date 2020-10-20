@@ -1,10 +1,11 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 
 
 const Register = () => {
   return (
-    <Fragment>
-    </Fragment>
+    <main id="page-container">
+      <h1>Register</h1>
+    </main>
   )
 }
 

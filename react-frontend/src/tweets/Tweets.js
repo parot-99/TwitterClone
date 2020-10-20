@@ -18,7 +18,7 @@ const Tweets = () => {
         'X-Requested-With': 'XMLHttpRequest', 
         'Content-Type': "application/json", 
         'Accept': "application/json",
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Token  ${localStorage.getItem('accessToken')}`
       }
     }
 
@@ -33,6 +33,7 @@ const Tweets = () => {
         setTweets(data)
       })
       .catch(error => {
+        setIsLoaded(true)
         setError(true)
         console.log(error);
       })
@@ -43,13 +44,12 @@ const Tweets = () => {
     }
     
   return (
-    <React.Fragment>
+    <main id="page-container">
       <TweetCreate onTweetAdd={onTweetAdd} />
       {!isLoaded && <h1 className="message">Loading</h1>}
       {error && <h1 className="message">Error</h1>}
-      {!error && <TweetList tweets={tweets} />}
-    </React.Fragment>
-    
+      {!error && <TweetList tweets={tweets || []} />}
+    </main> 
   )
 }
 

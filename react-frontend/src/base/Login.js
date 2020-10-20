@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import {useHistory} from 'react-router-dom'
+import AuthContext from './../utilities/AuthContext'
 
 
 const Login = () => {
+  const {setIsAuthenticated} = useContext(AuthContext)
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
-
+  const history = useHistory()
   
   const handleLogin = (event) => {
     event.preventDefault()
@@ -14,7 +17,7 @@ const Login = () => {
       password: password
     }
     
-    const url = 'http://127.0.0.1:8000/api/profiles/token/'
+    const url = 'http://127.0.0.1:8000/api/auth/login/'
     const request = {
       method: 'POST',
       headers: {
@@ -25,37 +28,48 @@ const Login = () => {
 
     fetch(url, request)
       .then(response => {
-        if(response.status === 200) {
+        setUserName('')
+        setPassword('')
+        
+        if(response.status === 200) {     
           return response.json()
         }
 
+        if(response.status === 401) {
+          throw new Error('Try again')
+        }
+
         if(response.status === 400) {
-          throw new Error('')
+          throw new Error('Try again')
         }
       })
       .then((data) => {
-        localStorage.setItem('token', data.access)
+        localStorage.setItem('accessToken', data.token)
+        setIsAuthenticated(true)
+        history.push('/home')
       })
-      .catch(error => console.log(error))
+      .catch(error => alert(error))
   }
 
   return (
-    <form onSubmit={e => handleLogin(e)} action="" method="POST" className="form-container">
-      <div className="form-item">
-        <h1>Log In</h1>
-      </div>
-      <div className="form-item">
-        <label htmlFor="id_username">Username</label>
-        <input type="text" name="username" id="id_username" value={username} onChange={e => setUserName(e.target.value)}/>
-      </div>
-      <div className="form-item">
-        <label htmlFor="id_password">Password</label>
-        <input type="password" name="password" id="id_password" value={password} onChange={e => setPassword(e.target.value)}/>
-      </div>
-      <div className="form-item">
-        <input type="submit" value="Log In" className="prim-btn cursor"/>
-      </div>
-    </form>
+    <main id="page-container">
+      <form onSubmit={e => handleLogin(e)} action="" method="POST" className="form-container">
+        <div className="form-item">
+          <h1>Log In</h1>
+        </div>
+        <div className="form-item">
+          <label htmlFor="id_username">Username</label>
+          <input type="text" name="username" id="id_username" value={username} onChange={e => setUserName(e.target.value)}/>
+        </div>
+        <div className="form-item">
+          <label htmlFor="id_password">Password</label>
+          <input type="password" name="password" id="id_password" value={password} onChange={e => setPassword(e.target.value)}/>
+        </div>
+        <div className="form-item">
+          <input type="submit" value="Log In" className="prim-btn cursor"/>
+        </div>
+      </form>
+    </main>
   )
 }
 
