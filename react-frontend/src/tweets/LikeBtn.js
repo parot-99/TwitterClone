@@ -10,7 +10,7 @@ const LikeBtn = (props) => {
 		const request = {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+				Authorization: `Token ${localStorage.getItem('accessToken')}`
       }   
 		}
 

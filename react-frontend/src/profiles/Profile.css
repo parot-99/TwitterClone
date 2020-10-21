@@ -1,0 +1,31 @@
+#profile-info {
+  width: 50%;
+  margin: auto;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+#profile-info p {
+  padding-top: 0.5rem;
+}
+
+#profile-pic {
+  width: 150px;
+  height: 150px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+#profile-header {
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1000px) {
+ #profile-info {
+   width: 100%;
+ }
+
+ .container {
+   width: 100%;
+ }
+}

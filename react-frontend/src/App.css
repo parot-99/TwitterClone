@@ -21,7 +21,7 @@ ul {
 
 #page-container {
   min-height: 100vh;
-  margin-top: 7.5rem;
+  margin-top: 5rem;
 }
 
 .container {
@@ -38,7 +38,7 @@ ul {
 }
 
 .nav-btn {
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   font-weight: bold;
 }
 
@@ -60,6 +60,19 @@ ul {
   background-color: var(--main-color);
 }
 
+.prim-btn-2 {
+  color: var(--main-color);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--main-color);
+  border-radius: 9999px;
+  outline: none;
+  height: fit-content;
+}
+
+.prim-btn-2:hover {
+  background-color: var(--main-hover-color);
+}
+
 .clicked:active, button:active {
   transform: translateY(4px);
 }
@@ -68,11 +81,21 @@ ul {
   cursor: pointer;
 }
 
+.link {
+  color: var(--main-color);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bolder {
+  font-weight: bolder;
+}
 
 /* header */
 
 #main-header {
-  height: fit-content;
   background-color: var(--header-color);
   position: fixed;
   top: 0;
@@ -81,7 +104,7 @@ ul {
 }
 
 #main-header .container {
-  height: 7vh;
+  height: 4rem;
   justify-content: space-between;
   align-items: center;
 }
@@ -130,7 +153,20 @@ ul {
 }
 
 @media screen and (max-width: 1000px) {
+  #page-container {
+    margin-top: 0;
+  }
+
   .form-container {
     max-width: 100%;
+  }
+
+  #main-header {
+    position: relative;
+  }
+
+  #main-header .container, .nav-bar {
+    flex-direction: column;
+    height: 12.5rem;
   }
 }

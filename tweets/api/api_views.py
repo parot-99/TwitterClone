@@ -42,6 +42,7 @@ def tweet_delete_view(request, tweet_id):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def tweet_list_view(request):
     tweets = Tweet.objects.all().order_by('-date_created')[:50]
     serializer = TweetSerializer(tweets, many=True)
@@ -49,12 +50,11 @@ def tweet_list_view(request):
     for data, tweet in zip(serializer.data, tweets) :
         data['isLiked'] =  request.user in tweet.likes.all()
         
-   
-
     return Response(serializer.data)
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def tweet_detail_view(request, tweet_id):
     tweet = get_object_or_404(Tweet, pk=tweet_id)
     serializer = TweetSerializer(tweet)
@@ -62,7 +62,7 @@ def tweet_detail_view(request, tweet_id):
     return Response(serializer.data)
 
 
-@api_view(['POST', 'GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def tweet_like_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id)

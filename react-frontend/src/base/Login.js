@@ -1,10 +1,10 @@
 import React, {useState, useContext} from 'react'
-import {useHistory} from 'react-router-dom'
+import {Redirect, useHistory} from 'react-router-dom'
 import AuthContext from './../utilities/AuthContext'
 
 
 const Login = () => {
-  const {setIsAuthenticated} = useContext(AuthContext)
+  const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext)
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
@@ -49,6 +49,10 @@ const Login = () => {
         history.push('/home')
       })
       .catch(error => alert(error))
+  }
+
+  if(isAuthenticated) {
+    return <Redirect to="/home"></Redirect>
   }
 
   return (

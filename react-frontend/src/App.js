@@ -8,10 +8,10 @@ import Navbar from './base/Navbar'
 import Tweets from './tweets/Tweets'
 import Base from './base/Base'
 import Landing from './base/Landing'
-import Profile from './profiles/profile'
+import Profile from './profiles/Profile'
 
 
-function App() {
+const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const value = {isAuthenticated, setIsAuthenticated}
 

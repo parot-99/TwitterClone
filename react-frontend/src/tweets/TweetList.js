@@ -9,12 +9,11 @@ const TweetList = (props) => {
     <section id="tweets-container">    
       {props.tweets.map((tweet) => (
         <article key={tweet.id} className="tweet-container">
-          <Link to={`/profile/${tweet.user.username}`}><h2 className="tweet-container-item">{tweet.user.username}</h2></Link>
-          <h4 className="tweet-container-item">
-            {tweet.id} {'->'} 
+          <Link to={`/profile/${tweet.user.username}`}><h3 className="tweet-container-item">{tweet.user.username}</h3></Link>
+          <p className="tweet-container-item">
             {tweet.is_retweet && tweet.retweet.content}
             {!tweet.is_retweet && tweet.content}
-          </h4>
+          </p>
           <LikeBtn tweetId={tweet.id} tweetLikes={tweet.likes} isLiked={tweet.isLiked} />
           <Retweetbtn tweetId={tweet.id} />
         </article>
