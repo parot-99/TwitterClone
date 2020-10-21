@@ -6,7 +6,7 @@ node_modules/
 debug.log
 settings-clone.py
 .vscode
-react-frontend
+#react-frontend
 # nodejs
 
 # dependencies
