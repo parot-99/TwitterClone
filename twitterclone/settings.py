@@ -131,11 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    BASE_DIR / 'react-frontend' / 'build' / 'static',
-    BASE_DIR / 'react-frontend' / 'build'
-]
+STATICFILES_DIRS = [BASE_DIR / 'react-frontend' / 'build' / 'static']
 STATIC_ROOT = 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
