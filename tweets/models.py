@@ -25,7 +25,7 @@ class Tweet(models.Model):
     )
     date_created = models.DateTimeField(auto_now_add=True)
     image = models.FileField(
-        upload_to='images/', 
+        upload_to='tweet_pics', 
         blank=True, 
         null=True
     )

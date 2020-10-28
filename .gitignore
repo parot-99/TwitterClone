@@ -5,6 +5,10 @@
 db.sqlite3
 settings-clone.py
 
+# media
+media/profile_pics/*
+media/tweet_pics/*
+
 # react
 
 react-frontend/public

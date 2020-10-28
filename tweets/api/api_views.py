@@ -1,19 +1,13 @@
 from random import randint
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.decorators import(
-    api_view,
-    permission_classes, 
-    authentication_classes,
-)
+from rest_framework.decorators import api_view
 from tweets.models import Tweet
 from .serializers import TweetSerializer, TweetCreateSerializer
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def tweet_create_view(request):
     serializer = TweetCreateSerializer(data=request.data)
 
@@ -25,7 +19,6 @@ def tweet_create_view(request):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
 def tweet_delete_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id)
     if not tweet.exists():
@@ -42,7 +35,6 @@ def tweet_delete_view(request, tweet_id):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def tweet_list_view(request):
     tweets = Tweet.objects.all().order_by('-date_created')[:50]
     serializer = TweetSerializer(tweets, many=True)
@@ -54,7 +46,6 @@ def tweet_list_view(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def tweet_detail_view(request, tweet_id):
     tweet = get_object_or_404(Tweet, pk=tweet_id)
     serializer = TweetSerializer(tweet)
@@ -63,7 +54,6 @@ def tweet_detail_view(request, tweet_id):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def tweet_like_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id)
 
@@ -84,7 +74,6 @@ def tweet_like_view(request, tweet_id):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def tweet_retweet_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id)
 
@@ -92,6 +81,6 @@ def tweet_retweet_view(request, tweet_id):
         return Response({}, status=status.HTTP_404_NOT_FOUND)
 
     parent = tweet.first()
-    retweet = Tweet.objects.create(user=request.user, retweet=parent)
+    retweet = Tweet.objects.create(user=request.user, retweet=parent, content='This is a retweet')
 
     return Response({}, status=status.HTTP_201_CREATED)
