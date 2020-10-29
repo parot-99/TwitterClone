@@ -1,0 +1,36 @@
+#settings-list {
+  padding: 1rem;
+  text-align: center;
+}
+
+#settings-list h2 {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+#settings-list h2:hover {
+  color: var(--main-color);
+}
+
+
+.settings-header {
+  display: flex;
+  align-items: center;
+}
+
+#confirm-delete {
+  display: none;
+  padding: 1rem;
+  width: fit-content;
+  color: rgb(197, 1, 1);
+  border: 1px solid  rgb(197, 1, 1);
+  border-radius: 9999px;
+}
+
+#confirm-delete:hover {
+  background-color: rgba(197, 1, 1, 0.1);
+}
+
+
+
+

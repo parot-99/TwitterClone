@@ -1,0 +1,21 @@
+#back {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+  margin: 1rem;
+  padding: 0.5rem;
+  fill: var(--main-color);
+  border-radius: 50%;
+  
+}
+
+#back svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+#back:hover {
+  background-color: var(--main-hover-color);
+}

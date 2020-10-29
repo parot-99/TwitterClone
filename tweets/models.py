@@ -15,11 +15,11 @@ class Tweet(models.Model):
         null=True, 
         on_delete=models.SET_NULL
     )
-    user = models.ForeignKey(User, models.CASCADE, related_name='tweets')
+    user = models.ForeignKey(User, models.CASCADE, related_name='user_tweets')
     content = models.CharField(max_length=240 ,blank=True, null =True)
     likes = models.ManyToManyField(
         User, 
-        related_name='tweet_user', 
+        related_name='user_likes', 
         blank=True, 
         through=TweetLike
     )

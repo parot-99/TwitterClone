@@ -17,7 +17,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         ]
 
     def get_tweets_count(self, obj):
-        return obj.user.tweets.count()
+        return obj.user.user_tweets.count()
 
 
 class UserSerializer(serializers.ModelSerializer):

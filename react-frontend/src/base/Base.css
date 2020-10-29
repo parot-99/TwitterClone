@@ -1,0 +1,87 @@
+#welcome {
+  height: 100vh;
+  background-image: url('./../images/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+#welcome-img {
+  width: 100%;
+  height: auto;
+}
+
+#join-us {
+  display: flex;
+  width: 40%;
+  height: 65%;
+  margin: auto;
+  align-items: center;
+}
+
+#join-us h1 {
+  padding: 1rem;
+  border: 1px solid #1DA1F2;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+#join-us a:hover h1 {
+  color: #1da1f2;
+}
+
+/* navbar */
+
+#main-header {
+  background-color: var(--header-color);
+  position: fixed;
+  top: 0;
+  min-width: 100%;
+  z-index: 1;
+}
+
+#main-header .container {
+  height: 4rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#main-header .container h1 {
+  color: var(--main-color);
+  font-weight: bolder;
+}
+
+.nav-bar {
+  align-items: center;
+}
+
+.nav-btn {
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+}
+
+.nav-btn:hover {
+  background-color: var(--main-hover-color);
+  border-radius: 5px;
+  color: var(--main-color);
+}
+
+.nav-btn:hover a {
+  color: var(--main-color);
+}
+  
+
+@media screen and (max-width: 1000px) {
+  #join-us {
+    width: 90%;
+  }
+  
+  #main-header .container, .nav-bar {
+    flex-direction: column;
+    height: 12.5rem;
+  }
+
+  #main-header {
+    position: relative;
+  }
+}

@@ -11,11 +11,6 @@ media/tweet_pics/*
 
 # react
 
-react-frontend/public
-react-frontend/src
-react-frontend/package-lock.json
-react-frontend/package.json
-
 
 # nodejs
 node_modules
