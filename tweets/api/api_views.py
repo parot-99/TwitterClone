@@ -10,7 +10,7 @@ from .serializers import TweetSerializer, TweetCreateSerializer
 @api_view(['POST'])
 def tweet_create_view(request):
     serializer = TweetCreateSerializer(data=request.data)
-
+  
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

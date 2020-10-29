@@ -9,9 +9,6 @@ settings-clone.py
 media/profile_pics/*
 media/tweet_pics/*
 
-# react
-
-
 # nodejs
 node_modules
 /.pnp
