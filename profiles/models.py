@@ -17,7 +17,7 @@ class FollowingRelation(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'from {self.from_profile} to {self.to_profile}'
+        return f'From {self.from_profile} To {self.to_profile}'
 
 
 class Profile(models.Model):

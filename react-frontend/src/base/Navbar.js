@@ -54,6 +54,11 @@ const Navbar = () => {
               <h3 className="nav-btn">Profile</h3>
             </NavLink>
           }
+          {isAuthenticated && 
+            <NavLink to="/search" activeClassName="active">
+              <h3 className="nav-btn">Search</h3>
+            </NavLink>
+          }
           {!isAuthenticated && 
             <NavLink to='/auth/login' activeClassName="active">
               <h3 className="nav-btn">Login</h3>

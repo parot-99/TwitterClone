@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.contrib.auth.password_validation import (
     validate_password,
     ValidationError
@@ -10,8 +11,10 @@ from rest_framework.decorators import api_view
 from .serializers import (
     UserSerializer,
     CurrentUserSerializer,
-    ProfileSerializer
+    ProfileSerializer,
+    UsersSerializer
 )
+from profiles.models import Profile, FollowingRelation
 from tweets.models import Tweet
 from tweets.api.serializers import TweetSerializer
 
@@ -21,7 +24,7 @@ def user_detail_view(request, username):
     user = get_object_or_404(User, username=username)
     tweets = Tweet.objects.filter(user=user.id).order_by('-date_created')
    
-    user_serializer = UserSerializer(user)
+    user_serializer = UserSerializer(user, context={'request': request})
     profile_serializer = ProfileSerializer(user.profile)
     tweets_serializer = TweetSerializer(tweets, many=True)
 
@@ -36,12 +39,44 @@ def user_detail_view(request, username):
     
     return Response(response_data, status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+def profile_list_view(request):
+    users = User.objects.all()
+    serializer = UsersSerializer(users, many=True)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 @api_view(['GET'])
 def current_user_view(request):
     return Response(
         {'username': request.user.username}, 
         status=status.HTTP_200_OK
     )
+
+
+@api_view(['POST'])
+def user_follow_view(request, username):
+    from_profile = request.user.profile  
+    to_profile = Profile.objects.get(user__username=username)
+    following = from_profile.following.all()
+    followed = True if to_profile in following else False
+
+    if followed:
+        from_profile.following.remove(to_profile)
+
+        return Response({'message': 'unfollowed'}, status=status.HTTP_200_OK)
+
+    else:
+        from_profile.following.add(to_profile)
+
+        return Response({'message': 'followed'}, status=status.HTTP_200_OK)
+    
+    
+   
+
+       
 
 
 

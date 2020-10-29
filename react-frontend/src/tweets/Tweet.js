@@ -12,7 +12,7 @@ const Tweet = (props) => {
         <div id="tweet-profile-pic">
           <img src={`${props.tweet.profile_pic}`} alt=""/>
         </div>
-        <Link to={`/profile/${props.tweet.user.username}`}><h3 className="tweet-container-item">{props.tweet.user.username}</h3></Link>
+        <Link to={`/profile/${props.tweet.username}`}><h3 className="tweet-container-item">{props.tweet.username}</h3></Link>
       </header>
       <p className="tweet-container-item">
         {props.tweet.content}

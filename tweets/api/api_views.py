@@ -18,25 +18,27 @@ def tweet_create_view(request):
     return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['DELETE'])
-def tweet_delete_view(request, tweet_id):
+@api_view(['POST'])
+def tweet_retweet_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id)
+
     if not tweet.exists():
         return Response({}, status=status.HTTP_404_NOT_FOUND)
 
-    tweet = tweet.filter(user=request.user)
+    parent = tweet.first()
+    retweet = Tweet.objects.create(user=request.user, retweet=parent, content='This is a retweet')
 
-    if not tweet.exists():
-        return Response({}, status=status.HTTP_401_UNAUTHORIZED)
-
-    tweet.delete()
-
-    return Response({}, status=status.HTTP_200_OK)
+    return Response({}, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])
 def tweet_list_view(request):
-    tweets = Tweet.objects.all().order_by('-date_created')[:50]
+    following = request.user.profile.following.all()
+    following_list = list(map(
+        lambda profile: profile.user.username, 
+        following
+    ))
+    tweets = Tweet.objects.filter(user__username__in=following_list).order_by('-date_created')[:50]
     serializer = TweetSerializer(tweets, many=True)
 
     for data, tweet in zip(serializer.data, tweets) :
@@ -51,6 +53,7 @@ def tweet_detail_view(request, tweet_id):
     serializer = TweetSerializer(tweet)
 
     return Response(serializer.data)
+
 
 
 @api_view(['POST'])
@@ -73,14 +76,26 @@ def tweet_like_view(request, tweet_id):
     return Response({'type': res_type}, status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
-def tweet_retweet_view(request, tweet_id):
+@api_view(['DELETE'])
+def tweet_delete_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id)
-
     if not tweet.exists():
         return Response({}, status=status.HTTP_404_NOT_FOUND)
 
-    parent = tweet.first()
-    retweet = Tweet.objects.create(user=request.user, retweet=parent, content='This is a retweet')
+    tweet = tweet.filter(user=request.user)
 
-    return Response({}, status=status.HTTP_201_CREATED)
+    if not tweet.exists():
+        return Response({}, status=status.HTTP_401_UNAUTHORIZED)
+
+    tweet.delete()
+
+    return Response({}, status=status.HTTP_200_OK)
+
+
+
+
+
+
+
+
+

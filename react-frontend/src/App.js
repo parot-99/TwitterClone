@@ -10,6 +10,7 @@ import Tweets from './tweets/Tweets'
 import Base from './base/Base'
 import Landing from './base/Landing'
 import Profile from './profiles/Profile'
+import SearchProfiles from './profiles/SearchProfiles'
 import Settings from './settings/Settings'
 
 
@@ -41,6 +42,10 @@ const App = () => {
           <PrivateRoute exact path='/profile/:username'>
             <Navbar />
             <Profile />     
+          </PrivateRoute>
+          <PrivateRoute exact path='/search'>
+            <Navbar />     
+            <SearchProfiles />
           </PrivateRoute>
           <PrivateRoute path='/settings'>
             <Navbar />  

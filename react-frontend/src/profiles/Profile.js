@@ -1,7 +1,9 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import {Link, useParams} from 'react-router-dom'
-import Tweet from './../tweets/Tweet'
 import './Profile.css'
+import FollowBtn from './FollowBtn'
+import Tweet from './../tweets/Tweet'
+
 
 
 const Profile = () => {
@@ -71,7 +73,10 @@ const Profile = () => {
                 </Link>  
               }
               {!userData.is_current_user && 
-                <h3 className="prim-btn-2">Follow</h3> 
+                <FollowBtn
+                  isFollowed={userData.is_followed} 
+                  username={userData.username}>
+                </FollowBtn>
               }
             </header>
             <h1 className="bolder">{profileData.name}</h1>
@@ -82,8 +87,8 @@ const Profile = () => {
               <p className="light-text-color ">Born {profileData.birthday}</p>
             }
             <p className="light-text-color">
-              <span className="bolder">36</span> Following 
-              <span className="bold"> 36 </span>Followers
+          <span className="bolder"> {profileData.following_count} </span> Following 
+              <span className="bold"> {profileData.followers_count} </span>Followers
             </p>
           </section>
           <section id="tweets-container">    
