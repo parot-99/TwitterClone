@@ -7,7 +7,7 @@ const ProfileSettings = () => {
   const [profilePic, setProfilePic] = useState(null)
 
   useEffect(() => {
-    const url = 'http://127.0.0.1:8000/api/settings/update/profile/'
+    const url = '/api/settings/update/profile/'
     const request = {
       method: 'GET',
       headers: {
