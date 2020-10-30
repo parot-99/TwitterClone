@@ -11,7 +11,7 @@ const LogoutallSettings = () => {
   const handleConfirm = (event) => {
     event.preventDefault()
 
-    const url = 'http://127.0.0.1:8000/api/auth/confirmpassword/'
+    const url = '/api/auth/confirmpassword/'
     const request = {
       method: 'POST',
       headers: {
@@ -47,7 +47,7 @@ const LogoutallSettings = () => {
   }
 
   const handleDelete = (event) => {
-    const url = 'http://127.0.0.1:8000/api/settings/delete/profile/'
+    const url = '/api/settings/delete/profile/'
     const request = {
       method: 'POST',
       headers: {

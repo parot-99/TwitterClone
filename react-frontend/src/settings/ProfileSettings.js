@@ -49,7 +49,7 @@ const ProfileSettings = () => {
       formData.append('profile_pic', profilePic, profilePic.name)
     }
 
-    const url = 'http://127.0.0.1:8000/api/settings/update/profile/'
+    const url = '/api/settings/update/profile/'
     const request = {
       method: 'PUT',
       headers: {

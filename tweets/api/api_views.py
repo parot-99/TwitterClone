@@ -19,14 +19,19 @@ def tweet_create_view(request):
 
 
 @api_view(['POST'])
-def tweet_retweet_view(request, tweet_id):
+def retweet_create_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id)
+    retweet_content = request.data['content']
 
     if not tweet.exists():
         return Response({}, status=status.HTTP_404_NOT_FOUND)
 
     parent = tweet.first()
-    retweet = Tweet.objects.create(user=request.user, retweet=parent, content='This is a retweet')
+    retweet = Tweet.objects.create(
+        user=request.user,
+        retweet=parent,
+        content=retweet_content
+    )
 
     return Response({}, status=status.HTTP_201_CREATED)
 
@@ -38,6 +43,8 @@ def tweet_list_view(request):
         lambda profile: profile.user.username, 
         following
     ))
+    following_list += [request.user.username]
+
     tweets = Tweet.objects.filter(user__username__in=following_list).order_by('-date_created')[:50]
     serializer = TweetSerializer(tweets, many=True)
 
@@ -51,8 +58,10 @@ def tweet_list_view(request):
 def tweet_detail_view(request, tweet_id):
     tweet = get_object_or_404(Tweet, pk=tweet_id)
     serializer = TweetSerializer(tweet)
+    new_serializer_data = serializer.data
+    new_serializer_data['isLiked'] =  request.user in tweet.likes.all()
 
-    return Response(serializer.data)
+    return Response(new_serializer_data, status=status.HTTP_200_OK)
 
 
 

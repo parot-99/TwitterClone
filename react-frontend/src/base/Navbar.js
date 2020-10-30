@@ -50,12 +50,12 @@ const Navbar = () => {
             </NavLink>
           }
           {isAuthenticated && 
-            <NavLink to={`/profile/${userName}`} activeClassName="active">
+            <NavLink to={`/profiles/${userName}`} activeClassName="active">
               <h3 className="nav-btn">Profile</h3>
             </NavLink>
           }
           {isAuthenticated && 
-            <NavLink to="/search" activeClassName="active">
+            <NavLink to="/profiles/search" activeClassName="active">
               <h3 className="nav-btn">Search</h3>
             </NavLink>
           }

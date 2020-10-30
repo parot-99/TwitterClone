@@ -29,7 +29,7 @@ const Register = () => {
       email: email,
     }
   
-    const url = 'http://127.0.0.1:8000/api/auth/register/'
+    const url = '/api/auth/register/'
     const request = {
       method: 'POST',
       headers: {
@@ -67,11 +67,11 @@ const Register = () => {
         </div>
         <div className="form-item">
           <label htmlFor="id_username">Username</label>
-          <input type="text" name="username" id="id_username" value={username} onChange={e => setUserName(e.target.value)}/>
+          <input type="text" name="username" id="id_username" value={username} onChange={e => setUserName(e.target.value)} autoComplete="off"/>
         </div>
         <div className="form-item">
           <label htmlFor="id_name">Name</label>
-          <input type="text" name="name" id="id_name" value={name} onChange={e => setName(e.target.value)}/>
+          <input type="text" name="name" id="id_name" value={name} onChange={e => setName(e.target.value)} autoComplete="off"/>
         </div>
         <div className="form-item">
           <label htmlFor="id_password">Password</label>
@@ -83,7 +83,7 @@ const Register = () => {
         </div>
         <div className="form-item">
           <label htmlFor="id_email">Email</label>
-          <input type="email" name="email" id="id_email" value={email} onChange={e => setEmail(e.target.value)}/>
+          <input type="email" name="email" id="id_email" value={email} onChange={e => setEmail(e.target.value)} autoComplete="off"/>
         </div>
         <div className="form-item">
           <input type="submit" value="Register" className="prim-btn cursor text-color"/>

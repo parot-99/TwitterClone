@@ -40,10 +40,19 @@ def user_detail_view(request, username):
     return Response(response_data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def profile_list_view(request):
+    username = request.data['username']
     users = User.objects.all()
-    serializer = UsersSerializer(users, many=True)
+    accepted_users = []
+
+
+    for user in users:
+        if username in user.username and username is not '':
+            accepted_users.append(user)
+
+
+    serializer = UsersSerializer(accepted_users, many=True)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
 

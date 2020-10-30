@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
+import {Switch, Route} from 'react-router-dom'
 import './Tweets.css'
 import TweetCreate from './TweetCreate'
 import Tweet from './Tweet'
+import RetweetCreate from './RetweetCreate'
 
 
 
@@ -48,16 +50,26 @@ const Tweets = () => {
     
   return ( 
     <main id="page-container">
-      <TweetCreate onTweetAdd={onTweetAdd} />
-      {!isLoaded && <div className="loader"></div>}
-      {error && <h1 className="message">Error</h1>}
-      {!error && 
-        <section id="tweets-container">    
-          {tweets.map((tweet) => (
-            <Tweet key={tweet.id} tweet={tweet} onTweetAdd={onTweetAdd} />
-          ))}
-        </section>
-      }
+      <Switch>
+        <Route exact path='/home'>
+          <TweetCreate onTweetAdd={onTweetAdd} />
+          {!isLoaded && <div className="loader"></div>}
+          {error && <h1 className="message">Error</h1>}
+          {!error && 
+            <section id="tweets-container">    
+              {tweets.map((tweet) => (
+                <Tweet key={tweet.id} tweet={tweet} onTweetAdd={onTweetAdd} />
+                ))}
+            </section>
+          }
+        </Route>
+        <Route exact path='/home/retweet'>
+          <RetweetCreate />
+        </Route>
+        <Route>
+          <h1 className="centered">Not Found</h1>
+        </Route>
+      </Switch>
     </main> 
   )
 }

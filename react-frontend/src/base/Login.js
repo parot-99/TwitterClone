@@ -22,7 +22,7 @@ const Login = () => {
       password: password
     }
     
-    const url = 'http://127.0.0.1:8000/api/auth/login/'
+    const url = '/api/auth/login/'
     const request = {
       method: 'POST',
       headers: {
@@ -60,11 +60,11 @@ const Login = () => {
       </div>
       <div className="form-item">
         <label htmlFor="id_username">Username</label>
-        <input type="text" name="username" id="id_username" value={username} onChange={e => setUserName(e.target.value)}/>
+        <input type="text" name="username" id="id_username" value={username} onChange={e => setUserName(e.target.value)} required={true} autoComplete="off"/>
       </div>
       <div className="form-item">
         <label htmlFor="id_password">Password</label>
-        <input type="password" name="password" id="id_password" value={password} onChange={e => setPassword(e.target.value)}/>
+        <input type="password" name="password" id="id_password" value={password} onChange={e => setPassword(e.target.value)} required={true}/>
       </div>
       <div className="form-item">
         <input type="submit" value="Log In" className="prim-btn cursor"/>

@@ -47,7 +47,7 @@ const LogoutallSettings = () => {
   }
 
   const handleLogout = (event) => {
-    const url = 'http://127.0.0.1:8000/api/auth/logoutall/'
+    const url = '/api/auth/logoutall/'
     const request = {
       method: 'POST',
       headers: {

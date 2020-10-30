@@ -1,10 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import {Link, useParams} from 'react-router-dom'
-import './Profile.css'
 import FollowBtn from './FollowBtn'
 import Tweet from './../tweets/Tweet'
-
-
 
 const Profile = () => {
   const [user, setUser] = useState(false)
@@ -53,7 +50,7 @@ const Profile = () => {
   }, [username])
 
   return (
-    <main id="page-container">
+    <Fragment>
       {!isLoaded && <div className="loader"></div>}
       {isLoaded && !user && 
         <h1 className="centered">User Not Found</h1>
@@ -98,7 +95,7 @@ const Profile = () => {
           </section>
         </Fragment>
       }
-    </main>  
+    </Fragment>  
   )
 }
 

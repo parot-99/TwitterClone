@@ -20,7 +20,7 @@ const PasswordSettings = () => {
       new_password2: newPassword2
     }
 
-    const url = 'http://127.0.0.1:8000/api/settings/update/password/'
+    const url = '/api/settings/update/password/'
     const request = {
       method: 'POST',
       headers: {

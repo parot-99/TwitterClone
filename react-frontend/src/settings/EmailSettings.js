@@ -17,7 +17,7 @@ const EmailSettings = () => {
       email: email,
     }
 
-    const url = 'http://127.0.0.1:8000/api/settings/update/email/'
+    const url = '/api/settings/update/email/'
     const request = {
       method: 'POST',
       headers: {

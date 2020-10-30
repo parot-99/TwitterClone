@@ -60,8 +60,8 @@ const TweetCreate = (props) => {
           placeholder="Your tweet..." 
           required={true} 
           value={content} 
-          onChange={e => 
-          setContent(e.target.value)}>
+          onChange={e => setContent(e.target.value)}
+          autoComplete="off">
         </textarea>
       </div>
       <div className="form-item">
