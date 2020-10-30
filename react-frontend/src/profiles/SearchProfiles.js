@@ -47,7 +47,7 @@ const SearchProfiles = () => {
       </header>
       <section id="settings-list">
         {user.map((user) => (
-          <Link key={user.id} to={`/profile/${user.username}`}><h2>{user.username}</h2></Link>
+          <Link key={user.id} to={`/profiles/${user.username}`}><h2>{user.username}</h2></Link>
         ))}
       </section>
     </Fragment>
