@@ -16,7 +16,6 @@ import Settings from './settings/Settings'
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [CSRF, setCSRF] = useState(null)
-  const [error, setError] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   
   useEffect(() => {
@@ -35,14 +34,9 @@ const App = () => {
         if(response.status === 200) {
           setIsAuthenticated(true)
           setCSRF(getCookie('csrftoken'))
-          setIsLoaded(true)
-          setError(false)
         }
 
-        else {
-          setIsLoaded(true)
-          setError(true)
-        }
+        setIsLoaded(true)     
       })
   }, [CSRF, isAuthenticated])
 
@@ -50,8 +44,7 @@ const App = () => {
   return (
     <Fragment>
       {!isLoaded && <div className="loader"></div>}
-      {error && <h1 className="message">Something wrog happend!</h1>}
-      {!error && isLoaded &&
+      {isLoaded &&
         <AuthContext.Provider value={{
           isAuthenticated,
           setIsAuthenticated,
