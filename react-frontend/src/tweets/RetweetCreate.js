@@ -4,7 +4,7 @@ import Retweet from './Retweet'
 import AuthContext from './../utilities/AuthContext'
 
 
-const RetweetCreate = () => {
+const RetweetCreate = (props) => {
   const {CSRF} = useContext(AuthContext)
   const location = useLocation()
   const history = useHistory()

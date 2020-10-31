@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import AuthContext from './utilities/AuthContext'
 import PrivateRoute from './utilities/PrivateRoute'
@@ -16,6 +16,8 @@ import Settings from './settings/Settings'
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [CSRF, setCSRF] = useState(null)
+  const [error, setError] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
   
   useEffect(() => {
     setCSRF(getCookie('csrftoken'))
@@ -33,44 +35,57 @@ const App = () => {
         if(response.status === 200) {
           setIsAuthenticated(true)
           setCSRF(getCookie('csrftoken'))
+          setIsLoaded(true)
+          setError(false)
+        }
+
+        else {
+          setIsLoaded(true)
+          setError(true)
         }
       })
-  }, [isAuthenticated, CSRF])
+  }, [CSRF, isAuthenticated])
 
   
   return (
-    <AuthContext.Provider value={{
-      isAuthenticated,
-      setIsAuthenticated,
-      CSRF
-    }}>
-      <Router>
-        <Switch>
-          <Route exact path='/'>
-            <Landing />
-          </Route> 
-          <Route path='/auth'>
-            <Navbar />  
-            <Base /> 
-          </Route> 
-          <PrivateRoute path='/home'>
-            <Navbar />  
-            <Tweets /> 
-          </PrivateRoute>
-          <PrivateRoute path='/profiles'>
-            <Navbar />
-            <Profiles />     
-          </PrivateRoute>
-          <PrivateRoute path='/settings'>
-            <Navbar />  
-            <Settings /> 
-          </PrivateRoute>
-          <Route>
-            <h1 className="centered">Not Found</h1>
-          </Route>
-        </Switch>
-      </Router>
-    </AuthContext.Provider>
+    <Fragment>
+      {!isLoaded && <div className="loader"></div>}
+      {error && <h1 className="message">Something wrog happend!</h1>}
+      {!error && isLoaded &&
+        <AuthContext.Provider value={{
+          isAuthenticated,
+          setIsAuthenticated,
+          CSRF
+        }}>
+          <Router>
+            <Switch>
+              <Route exact path='/'>
+                <Landing />
+              </Route> 
+              <Route path='/auth'>
+                <Navbar />  
+                <Base /> 
+              </Route> 
+              <PrivateRoute path='/home'>
+                <Navbar />  
+                <Tweets /> 
+              </PrivateRoute>
+              <PrivateRoute path='/profiles'>
+                <Navbar />
+                <Profiles />     
+              </PrivateRoute>
+              <PrivateRoute path='/settings'>
+                <Navbar />  
+                <Settings /> 
+              </PrivateRoute>
+              <Route>
+                <h1 className="centered">Not Found</h1>
+              </Route>
+            </Switch>
+          </Router>
+        </AuthContext.Provider>
+      }
+    </Fragment>
   )
 }
 

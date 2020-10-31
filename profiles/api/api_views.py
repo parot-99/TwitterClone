@@ -48,7 +48,7 @@ def profile_list_view(request):
 
 
     for user in users:
-        if username in user.username and username is not '':
+        if username in user.username and username != '':
             accepted_users.append(user)
 
 

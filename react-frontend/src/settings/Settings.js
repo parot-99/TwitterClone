@@ -4,7 +4,7 @@ import './Settings.css'
 import ProfileSettings from './ProfileSettings'
 import PasswordSettings from './PasswordSettings'
 import EmailSettings from './EmailSettings'
-import LogoutallSettings from './LogoutallSettings'
+// import LogoutallSettings from './LogoutallSettings'
 import DeleteAccount from './DeleteAccount'
 import BackIcon from './../icons/BackIcon'
 
@@ -18,7 +18,7 @@ const Settings = () => {
             <Link to='/settings/profile'><h2>Profile</h2></Link>
             <Link to='/settings/password'><h2 >Password</h2></Link>
             <Link to='/settings/email'><h2 >Email</h2></Link>
-            <Link to='/settings/logoutall'><h2 >Logout All Devices</h2></Link>
+            {/* <Link to='/settings/logoutall'><h2 >Logout All Devices</h2></Link> */}
             <Link to='/settings/delete/profile'><h2 >Delete Account</h2></Link>
           </header>
         </Route>
@@ -43,13 +43,13 @@ const Settings = () => {
           </div>
           <EmailSettings />
         </Route>
-        <Route exact path='/settings/logoutall'>
+        {/* <Route exact path='/settings/logoutall'>
           <div className="settings-header">
             <BackIcon to='/settings'/>
             <h1>Logout All Devices</h1>
           </div>
           <LogoutallSettings />
-        </Route>
+        </Route> */}
         <Route exact path='/settings/delete/profile'>
           <div className="settings-header">
             <BackIcon to='/settings'/>

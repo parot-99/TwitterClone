@@ -10,6 +10,7 @@ const Profile = () => {
   const [tweetsData, setTweetsData] = useState([])
   const [error, setError] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [followersFlag, setFollowersFlag] = useState(false)
   const {username} = useParams()
 
   useEffect(() => {
@@ -47,7 +48,11 @@ const Profile = () => {
         setError(true)
         console.log(error)
       })
-  }, [username])
+  }, [username, followersFlag])
+
+  const onFollowersChange = () => {
+    setFollowersFlag(!followersFlag)
+  }
 
   return (
     <Fragment>
@@ -72,7 +77,8 @@ const Profile = () => {
               {!userData.is_current_user && 
                 <FollowBtn
                   isFollowed={userData.is_followed} 
-                  username={userData.username}>
+                  username={userData.username}
+                  onFollowersChange={onFollowersChange}>
                 </FollowBtn>
               }
             </header>

@@ -25,6 +25,7 @@ const FollowBtn = (props) => {
     fetch(url, request)
       .then(response => {
         if(response.status === 200) {
+          props.onFollowersChange()
           return response.json()
         }
 
