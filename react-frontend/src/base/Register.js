@@ -1,8 +1,10 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useContext} from 'react'
 import {Link, useHistory} from 'react-router-dom'
+import AuthContext from './../utilities/AuthContext'
 
 
 const Register = () => {
+  const {CSRF} = useContext(AuthContext)
   const [username, setUserName] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
@@ -34,7 +36,8 @@ const Register = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', 
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'X-CSRFToken': CSRF
       },
       body: JSON.stringify(data)
     }

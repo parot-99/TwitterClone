@@ -18,8 +18,8 @@ const Navbar = () => {
         method: 'GET',
         headers: {
           'accepts': 'application/json',
-          Authorization: `Token ${localStorage.getItem('accessToken')}`
-        }
+        },
+        credentials: 'same-origin',
       }
      
       fetch(url, request)

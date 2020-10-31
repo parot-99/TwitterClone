@@ -1,7 +1,9 @@
-import React, {Fragment, useState, useEffect} from 'react'
+import React, {Fragment, useState, useEffect, useContext} from 'react'
+import AuthContext from './../utilities/AuthContext'
 
 
 const FollowBtn = (props) => {
+  const {CSRF} = useContext(AuthContext)
   const [isFollowed, setIsFollowed] = useState(false)
 
   useEffect(()=> {
@@ -13,10 +15,11 @@ const FollowBtn = (props) => {
     const request = {
       method: 'POST',
       headers: {
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
         'Content-Type': 'application/json', 
-        'Accept': 'application/json'
-      }
+        'Accept': 'application/json',
+        'X-CSRFToken': CSRF
+      },
+      credentials: 'same-origin',
     }
 
     fetch(url, request)

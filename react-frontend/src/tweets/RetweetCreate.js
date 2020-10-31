@@ -1,9 +1,11 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useContext} from 'react'
 import {useLocation, useHistory} from 'react-router-dom'
 import Retweet from './Retweet'
+import AuthContext from './../utilities/AuthContext'
 
 
 const RetweetCreate = () => {
+  const {CSRF} = useContext(AuthContext)
   const location = useLocation()
   const history = useHistory()
   const [content, setContent] = useState('')
@@ -15,10 +17,11 @@ const RetweetCreate = () => {
     const request = {
       method: 'POST',
       headers: {
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
         'Content-Type': 'application/json', 
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'X-CSRFToken': CSRF
       },
+      credentials: 'same-origin',
       body: JSON.stringify({content: content})
     }
 

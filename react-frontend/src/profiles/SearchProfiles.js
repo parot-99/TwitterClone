@@ -1,8 +1,10 @@
-import React, {Fragment, useEffect, useState} from 'react'
+import React, {Fragment, useEffect, useState, useContext} from 'react'
 import {Link} from 'react-router-dom'
+import AuthContext from './../utilities/AuthContext'
 
 
 const SearchProfiles = () => {
+  const {CSRF} = useContext(AuthContext)
   const [user, setUsers] = useState([])
   const [username, setUsername] = useState('')
 
@@ -11,11 +13,13 @@ const SearchProfiles = () => {
     const request = {
       method: 'POST',
       headers: {
-        Authorization: `Token  ${localStorage.getItem('accessToken')}`,
         'Content-Type': 'application/json', 
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'X-CSRFToken': CSRF
+        
       },
-      body: JSON.stringify({'username': username})
+      credentials: 'same-origin',
+      body: JSON.stringify({'username': username}),
     }
 
     fetch(url, request)
@@ -30,7 +34,7 @@ const SearchProfiles = () => {
         setUsers(data || [])
       })
       .catch(error => console.log(error))
-  }, [username])
+  }, [username, CSRF])
 
   
   return (

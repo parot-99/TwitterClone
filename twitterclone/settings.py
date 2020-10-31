@@ -38,9 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
     'rest_framework',
-    'knox',
     'tweets.apps.TweetsConfig',
     'react.apps.ReactConfig',
     'profiles.apps.ProfilesConfig',
@@ -141,44 +139,24 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
 # rest_frameowrk
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'knox.auth.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-}
-
-if not DEBUG:
-    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
-        'rest_framework.renderers.JSONRenderer', 
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer'
     ]
-
-# CORS
-
-if DEBUG:
-    CORS_URLS_REGEX = r'^/api/.*$'
-    CORS_ALLOW_ALL_ORIGINS = True
-
-# JWT know authentication
-
-from datetime import timedelta
-from rest_framework.settings import api_settings
-
-REST_KNOX = {
-  'SECURE_HASH_ALGORITHM': 'cryptography.hazmat.primitives.hashes.SHA512',
-  'AUTH_TOKEN_CHARACTER_LENGTH': 64,
-  'TOKEN_TTL': timedelta(days=9999),
-  'USER_SERIALIZER': 'knox.serializers.UserSerializer',
-  'TOKEN_LIMIT_PER_USER': None,
-  'AUTO_REFRESH': False,
 }
 
 # constants
 
 MAX_TWEET_LENGTH = 240
+
+

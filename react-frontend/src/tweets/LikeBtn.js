@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
-
+import React, {useState, useContext} from 'react'
+import AuthContext from './../utilities/AuthContext'
 
 const LikeBtn = (props) => {
+  const {CSRF} = useContext(AuthContext)
   const [likes, setLikes] = useState(props.tweetLikes)
   const [isLiked, setIsLiked] = useState(props.isLiked)
 
@@ -10,10 +11,11 @@ const LikeBtn = (props) => {
       const request = {
         method: 'POST',
         headers: {
-          Authorization: `Token ${localStorage.getItem('accessToken')}`,
           'Content-Type': 'application/json', 
-          'Accept': 'application/json'
-        }   
+          'Accept': 'application/json',
+          'X-CSRFToken': CSRF
+        },
+        credentials: 'same-origin',  
       }
 
       fetch(url, request)

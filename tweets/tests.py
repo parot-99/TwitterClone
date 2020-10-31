@@ -58,13 +58,13 @@ class TweetTestCase(TestCase):
         response = self.client.post('/api/tweets/1/like')
         self.assertEqual(response.status_code, 200)
 
-    def test_action_retweet_api(self):
-        response = self.client.post('/api/tweets/1/retweet')
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(
-            Tweet.objects.get(id=4).retweet.content,
-            Tweet.objects.get(id=1).content
-        )
+    # def test_action_retweet_api(self):
+    #     response = self.client.post('/api/tweets/1/retweet')
+    #     self.assertEqual(response.status_code, 201)
+    #     self.assertEqual(
+    #         Tweet.objects.get(id=4).retweet.content,
+    #         Tweet.objects.get(id=1).content
+    #     )
 
     def test_tweet_create_api(self):
         response = self.client.post(

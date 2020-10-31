@@ -17,9 +17,9 @@ const Profile = () => {
     const request = {
       method: 'GET',
       headers: {
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
         'Accept': 'application/json'
-      }
+      },
+      credentials: 'same-origin',
     }
 
     fetch(url, request)

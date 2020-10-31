@@ -5,20 +5,21 @@ import AuthContext from './../utilities/AuthContext'
 
 const LogoutallSettings = () => {
   const [password, setPassword] = useState('')
-  const {setIsAuthenticated} = useContext(AuthContext)
+  const {setIsAuthenticated, CSRF} = useContext(AuthContext)
   const history = useHistory()
 
   const handleConfirm = (event) => {
     event.preventDefault()
 
-    const url = 'http://127.0.0.1:8000/api/auth/confirmpassword/'
+    const url = ''
     const request = {
       method: 'POST',
       headers: {
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-CSRFToken': CSRF,
       },
+      credentials: 'same-origin',
       body: JSON.stringify({password: password})
     }
 

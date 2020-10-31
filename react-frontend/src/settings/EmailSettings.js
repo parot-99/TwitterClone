@@ -1,6 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import AuthContext from './../utilities/AuthContext'
+
 
 const EmailSettings = () => {
+  const {CSRF} = useContext(AuthContext)
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   
@@ -21,10 +24,11 @@ const EmailSettings = () => {
     const request = {
       method: 'POST',
       headers: {
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-CSRFToken': CSRF,
       },
+      credentials: 'same-origin',
       body: JSON.stringify(data)
     }
 

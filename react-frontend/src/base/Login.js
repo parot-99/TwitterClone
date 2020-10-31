@@ -4,10 +4,11 @@ import AuthContext from './../utilities/AuthContext'
 
 
 const Login = () => {
-  const {setIsAuthenticated} = useContext(AuthContext)
+  const {setIsAuthenticated, CSRF} = useContext(AuthContext)
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
+
 
   const clearFields = () => {
     setUserName('')
@@ -27,8 +28,10 @@ const Login = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', 
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'X-CSRFToken': CSRF
       },
+      credentials: 'same-origin',
       body: JSON.stringify(data)
     }
 
@@ -46,7 +49,6 @@ const Login = () => {
 
       })
       .then((data) => {
-        localStorage.setItem('accessToken', data.token)
         setIsAuthenticated(true)
         history.push('/home')
       })

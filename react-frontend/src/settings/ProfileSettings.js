@@ -1,6 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
+import AuthContext from './../utilities/AuthContext'
+
 
 const ProfileSettings = () => {
+  const {CSRF} = useContext(AuthContext)
   const [bio, setBio] = useState('')
   const [birthday, setBirthday] = useState('')
   const [name, setName] = useState('')
@@ -11,9 +14,9 @@ const ProfileSettings = () => {
     const request = {
       method: 'GET',
       headers: {
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
         'Accept': 'application/json'
-      }
+      },
+      credentials: 'same-origin',
     }
 
     fetch(url, request)
@@ -53,8 +56,11 @@ const ProfileSettings = () => {
     const request = {
       method: 'PUT',
       headers: {
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
+        'Content-Type': 'application/json', 
+        'Accept': 'application/json',
+        'X-CSRFToken': CSRF
       },
+      credentials: 'same-origin',
       body: formData
     }
 

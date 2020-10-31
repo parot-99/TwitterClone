@@ -4,7 +4,7 @@ import AuthContext from './../utilities/AuthContext'
 
 
 const Logout = () => {
-  const {setIsAuthenticated} = useContext(AuthContext)
+  const {setIsAuthenticated, CSRF} = useContext(AuthContext)
   const history = useHistory()
 
 	const handleLogout = () => {
@@ -13,14 +13,14 @@ const Logout = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Token  ${localStorage.getItem('accessToken')}`
-      }
+        'X-CSRFToken': CSRF,
+      },
+      credentials: 'same-origin'
     }
 
     fetch(url, request)
       .then(response => {
-        if(response.status === 204) {     
-          localStorage.removeItem('accessToken')
+        if(response.status === 200) {     
           setIsAuthenticated(false)
           history.push('/')
         }

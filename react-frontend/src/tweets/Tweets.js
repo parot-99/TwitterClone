@@ -6,21 +6,20 @@ import Tweet from './Tweet'
 import RetweetCreate from './RetweetCreate'
 
 
-
 const Tweets = () => {
   const [tweets, setTweets] = useState([])
   const [error, setError] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isTweetAdded, setIsTweetAdded] = useState(false)
-
+ 
   useEffect(() => {
     const url = '/api/tweets/'
     const request = {
       method: 'GET',
       headers: {
-        Authorization: `Token  ${localStorage.getItem('accessToken')}`, 
         'Accept': 'application/json'
-      }
+      },
+      credentials: 'same-origin'
     }
 
     fetch(url, request)

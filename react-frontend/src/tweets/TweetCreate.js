@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import AuthContext from './../utilities/AuthContext'
 
 
 const TweetCreate = (props) => {
+  const {CSRF} = useContext(AuthContext)
   const [content, setContent] = useState('')
   
   const handleTweet = (event) => {
@@ -15,10 +17,11 @@ const TweetCreate = (props) => {
     const request = {
       method: 'POST',
       headers: {  
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
         'Content-Type': 'application/json', 
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'X-CSRFToken': CSRF
       },
+      credentials: 'same-origin',
       body: JSON.stringify(data)
     }
 
