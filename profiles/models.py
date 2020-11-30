@@ -27,7 +27,7 @@ class Profile(models.Model):
     birthday = models.DateField(blank=True, null=True)
     name = models.CharField(max_length=50)
     profile_pic = models.ImageField(
-        default='s3://parot-twitter-clone-bucket/profile_pics/default.png', 
+        default='profile_pics/default.png', 
         upload_to='profile_pics'
     )
     following = models.ManyToManyField(
