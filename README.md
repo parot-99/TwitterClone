@@ -25,21 +25,23 @@ Live Demo: [TwitterClone]
 * [Django]
 * [Django Rest Framework] 
 * [React] 
-* [React Router] 
+* [React Router]
+* [Heroku]
+* [AWS S3]
 
 
 
 ### Todos
 
- - Serving media files using amazon s3
  - Handling error messages
- - Adding Private profile function
  - Add better styling
 
-   [Django]: <https://www.djangoproject.com/>
-   [Django Rest Framework]: <https://www.django-rest-framework.org/>
-   [React]: <https://reactjs.org/>
-   [React Router]: <https://reactrouter.com>
-   [TwitterClone]: <https://parot-twitter-clone.herokuapp.com/>
+  [Django]: <https://www.djangoproject.com/>
+  [Django Rest Framework]: <https://www.django-rest-framework.org/>
+  [React]: <https://reactjs.org/>
+  [React Router]: <https://reactrouter.com>
+  [TwitterClone]: <https://parot-twitter-clone.herokuapp.com/>
+  [AWS S3]: <https://aws.amazon.com/s3/>
+  [Heroku]: <https://www.heroku.com>
   
 
