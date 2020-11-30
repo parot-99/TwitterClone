@@ -27,8 +27,9 @@ const RetweetCreate = (props) => {
 
     fetch(url, request)
       .then(response => {
-        if(response.status === 201) {
+        if (response.status === 201) {
           history.push('/home')
+          props.onTweetAdd()
           return 
         }
 

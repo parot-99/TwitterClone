@@ -1,15 +1,10 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import AuthContext from './utilities/AuthContext'
-import PrivateRoute from './utilities/PrivateRoute'
-import getCookie from './utilities/getCookie'
-import './App.css'
-import './Form.css'
-import './variables.css'
-import Navbar from './base/Navbar'
+import './BseCSS/index'
+import {AuthContext, PrivateRoute, getCookie} from './utilities'
+import {PageNotFound} from './handlers'
+import {Navbar, Base, Landing} from './base'
 import Tweets from './tweets/Tweets'
-import Base from './base/Base'
-import Landing from './base/Landing'
 import Profiles from './profiles/Profiles'
 import Settings from './settings/Settings'
 
@@ -19,8 +14,6 @@ const App = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   
   useEffect(() => {
-    setCSRF(getCookie('csrftoken'))
-    
     const url = '/api/auth/authenticated/'
     const request = {
       method: 'GET',
@@ -40,7 +33,6 @@ const App = () => {
       })
   }, [CSRF, isAuthenticated])
 
-  
   return (
     <Fragment>
       {!isLoaded && <div className="loader"></div>}
@@ -56,11 +48,11 @@ const App = () => {
                 <Landing />
               </Route> 
               <Route path='/auth'>
-                <Navbar />  
+                <Navbar />
                 <Base /> 
               </Route> 
               <PrivateRoute path='/home'>
-                <Navbar />  
+                <Navbar />
                 <Tweets /> 
               </PrivateRoute>
               <PrivateRoute path='/profiles'>
@@ -68,11 +60,11 @@ const App = () => {
                 <Profiles />     
               </PrivateRoute>
               <PrivateRoute path='/settings'>
-                <Navbar />  
+                <Navbar />
                 <Settings /> 
               </PrivateRoute>
               <Route>
-                <h1 className="centered">Not Found</h1>
+                <PageNotFound name="Landing Page" to="/" />
               </Route>
             </Switch>
           </Router>

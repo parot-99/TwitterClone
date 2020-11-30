@@ -21,16 +21,13 @@ const LikeBtn = (props) => {
       fetch(url, request)
         .then(response => {
           if(response.status === 200) {
-            return response.json()
+            setIsLiked(!isLiked)
+            isLiked? setLikes(likes - 1): setLikes(likes + 1) 
           }
 
           else {
-            throw new Error()
+            throw new Error('Something Wrong Happend!')
           }
-        })
-        .then((data) => {
-          data.type==='like'? setLikes(likes+ 1): setLikes(likes- 1) 
-          data.type==='like'? setIsLiked(true): setIsLiked(false) 
         })
         .catch(error => {
           alert(error)

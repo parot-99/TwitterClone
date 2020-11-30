@@ -3,6 +3,7 @@ import './Profiles.css'
 import {Switch, Route} from 'react-router-dom'
 import Profile from './Profile'
 import SearchProfiles from './SearchProfiles'
+import {PageNotFound} from './../handlers'
 
 const Profiles = () => {
   return ( 
@@ -15,7 +16,7 @@ const Profiles = () => {
           <Profile />
         </Route>
         <Route>
-          <h1 className="centered">Not Found</h1>
+          <PageNotFound name="home" to="/home" />
         </Route>
       </Switch>
     </main>

@@ -1,8 +1,11 @@
 # django
+DeploymentFiles
+DevelopmentFiles
 **/__pycache__
 .vscode
 db.sqlite3
 settings-clone.py
+dev.py
 
 # media
 media/profile_pics/*
@@ -22,5 +25,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-DeploymentFiles
-DevelopmentFiles
+

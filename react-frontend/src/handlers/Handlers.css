@@ -1,0 +1,8 @@
+#page-not-found h1 {
+  margin-top: 5rem;
+  color: var(--main-color);
+}
+
+#page-not-found h2 {
+  width: fit-content;
+}

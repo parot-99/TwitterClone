@@ -4,6 +4,7 @@ import './Tweets.css'
 import TweetCreate from './TweetCreate'
 import Tweet from './Tweet'
 import RetweetCreate from './RetweetCreate'
+import {PageNotFound} from './../handlers'
 
 
 const Tweets = () => {
@@ -24,7 +25,7 @@ const Tweets = () => {
 
     fetch(url, request)
       .then((response) => {
-        if(response.status === 200) {
+        if (response.status === 200) {
           return response.json()
         }
 
@@ -63,10 +64,10 @@ const Tweets = () => {
           }
         </Route>
         <Route exact path='/home/retweet'>
-          <RetweetCreate />
+          <RetweetCreate onTweetAdd={onTweetAdd} />
         </Route>
         <Route>
-          <h1 className="centered">Not Found</h1>
+          <PageNotFound name="home" to="/home" />
         </Route>
       </Switch>
     </main> 

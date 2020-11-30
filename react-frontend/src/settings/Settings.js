@@ -7,6 +7,7 @@ import EmailSettings from './EmailSettings'
 // import LogoutallSettings from './LogoutallSettings'
 import DeleteAccount from './DeleteAccount'
 import BackIcon from './../icons/BackIcon'
+import {PageNotFound} from './../handlers'
 
 
 const Settings = () => {
@@ -58,7 +59,7 @@ const Settings = () => {
           <DeleteAccount />
         </Route>
         <Route>
-          <h1 className="centered">Not Found</h1>
+          <PageNotFound name="settings" to="/settings" />
         </Route>
       </Switch>
     </main>

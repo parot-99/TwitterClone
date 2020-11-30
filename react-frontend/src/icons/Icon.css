@@ -19,3 +19,11 @@
 #back:hover {
   background-color: var(--main-hover-color);
 }
+
+#sad {
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  margin: 1rem auto;
+  fill: var(--main-color);
+}

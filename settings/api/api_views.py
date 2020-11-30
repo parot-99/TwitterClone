@@ -22,7 +22,10 @@ def profile_update_view(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'PUT':
-        serializer = ProfileSerializer(instance=user.profile, data=request.data)
+        serializer = ProfileSerializer(
+            instance=user.profile,
+            data=request.data
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
 

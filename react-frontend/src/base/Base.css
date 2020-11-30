@@ -21,13 +21,13 @@
 
 #join-us h1 {
   padding: 1rem;
-  border: 1px solid #1DA1F2;
+  border: 1px solid var(--twitter-color);
   border-radius: 9999px;
   cursor: pointer;
 }
 
 #join-us a:hover h1 {
-  color: #1da1f2;
+  color: var(--twitter-color);
 }
 
 /* navbar */

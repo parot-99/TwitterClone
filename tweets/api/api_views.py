@@ -76,13 +76,11 @@ def tweet_like_view(request, tweet_id):
 
     if request.user in tweet.likes.all():
         tweet.likes.remove(request.user)
-        res_type = 'unlike'
 
     else:
         tweet.likes.add(request.user)
-        res_type = 'like'
 
-    return Response({'type': res_type}, status=status.HTTP_200_OK)
+    return Response({}, status=status.HTTP_200_OK)
 
 
 @api_view(['DELETE'])

@@ -27,26 +27,17 @@ const TweetCreate = (props) => {
 
     fetch(url, request)
       .then(response => {   
-        if(response.status === 201) {
+        if (response.status === 201) {
+          setContent('')
           props.onTweetAdd()
           return response.json()
         }
 
-        if(response.status === 400) {
+        if (response.status === 400) {
           throw new Error('Try a shorter tweet')
         }
 
-        if(response.status === 401) {
-          throw new Error('Login first to perform this action')
-        }      
-        
-        else {
-          throw new Error('Something wrong happend!')
-        }
-        
-      })
-      .then(() => {
-        setContent('') 
+        throw new Error('Something wrong happend!')        
       })
       .catch((error) => {
         console.log(error)
@@ -54,7 +45,7 @@ const TweetCreate = (props) => {
   }
  
   return (
-    <form onSubmit={(e) => handleTweet(e)} action="" method="POST" id="tweet-create-form" className="form-container">
+    <form onSubmit={(e) => handleTweet(e)} method="POST" id="tweet-create-form" className="form-container">
       <div className="form-item">
         <textarea 
           name="content" 

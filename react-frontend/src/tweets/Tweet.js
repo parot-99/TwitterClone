@@ -12,15 +12,20 @@ const Tweet = (props) => {
         <div id="tweet-profile-pic">
           <img src={`${props.tweet.profile_pic}`} alt=""/>
         </div>
-        <Link to={`/profiles/${props.tweet.username}`}><h3 className="tweet-container-item">{props.tweet.username}</h3></Link>
+        <Link to={`/profiles/${props.tweet.username}`}>
+          <h3 className="tweet-container-item">{props.tweet.username}</h3>
+        </Link>
       </header>
       <p className="tweet-container-item">
         {props.tweet.content}
       </p>
       {props.tweet.is_retweet && <Retweet tweet={props.tweet.retweet} />}
-      <LikeBtn tweetId={props.tweet.id} tweetLikes={props.tweet.likes} isLiked={props.tweet.isLiked} />
-      <Retweetbtn tweet={props.tweet} onTweetAdd={props.onTweetAdd} />
-      
+      <LikeBtn 
+        tweetId={props.tweet.id} 
+        tweetLikes={props.tweet.likes} 
+        isLiked={props.tweet.isLiked} 
+      />
+      <Retweetbtn tweet={props.tweet} onTweetAdd={props.onTweetAdd} />     
     </article>
   )
 }

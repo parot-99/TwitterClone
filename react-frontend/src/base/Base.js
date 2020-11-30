@@ -4,6 +4,7 @@ import './Base.css'
 import Login from './Login'
 import Register from './Register'
 import AuthenticatedRoute from './../utilities/AuthenticatedRoute'
+import {PageNotFound} from './../handlers'
 
 
 const Base = () => {
@@ -17,7 +18,7 @@ const Base = () => {
           <Register />    
         </AuthenticatedRoute>
         <Route>
-          <h1 className="centered">Not Found</h1>
+          <PageNotFound name="Landing Page" to="/" />
         </Route>
       </Switch>  
     </main>  
