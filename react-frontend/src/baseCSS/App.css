@@ -109,7 +109,7 @@ ul {
 /* loader */
 
 .loader {
-  border: 10px solid #f3f3f3;
+  border: 10px solid var(--loader-color);
   border-top: 10px solid var(--main-color);
   border-radius: 50%;
   width: 75px;
@@ -118,11 +118,21 @@ ul {
   margin: 4rem auto;
 }
 
+.btn-loader {
+  border: 1px solid var(--loader-color);
+  border-top: 1px solid var(--main-color);
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
+
+/* mobile */
 
 @media screen and (max-width: 1000px) {
   #page-container {

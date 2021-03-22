@@ -1,14 +1,32 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect, useRef} from 'react'
 import AuthContext from './../utilities/AuthContext'
 
 
 const TweetCreate = (props) => {
   const {CSRF} = useContext(AuthContext)
   const [content, setContent] = useState('')
-  
+  const tweetBtn = useRef(null)
+  const tweetCounter = useRef(null)
+ 
+  useEffect(() => {
+    if (content.length > 240) {
+      tweetBtn.current.disabled = true
+      tweetCounter.current.style.color = 'red'
+    }
+
+    else {
+      tweetBtn.current.disabled = false
+      tweetCounter.current.style.color = 'inherit'
+    }
+  }, [content])
+ 
+  const handleContent = (event) => {
+    setContent(event.target.value)
+  }
+
   const handleTweet = (event) => {
     event.preventDefault()
-   
+  
     const data = {
       content: content
     }
@@ -30,14 +48,11 @@ const TweetCreate = (props) => {
         if (response.status === 201) {
           setContent('')
           props.onTweetAdd()
-          return response.json()
         }
 
         if (response.status === 400) {
-          throw new Error('Try a shorter tweet')
-        }
-
-        throw new Error('Something wrong happend!')        
+         
+        }   
       })
       .catch((error) => {
         console.log(error)
@@ -49,17 +64,23 @@ const TweetCreate = (props) => {
       <div className="form-item">
         <textarea 
           name="content" 
-          id="id_content" cols="50" 
-          rows="7" 
+          id="id_content" 
+          cols="60" 
+          rows="10" 
           placeholder="Your tweet..." 
           required={true} 
           value={content} 
-          onChange={e => setContent(e.target.value)}
+          onChange={(e) => handleContent(e)}
           autoComplete="off">
         </textarea>
       </div>
       <div className="form-item">
-        <button type="submit" className="prim-btn cursor">Tweet</button>
+        <h6 ref={tweetCounter}>{content.length} / 240</h6>
+      </div>
+      <div className="form-item">
+        <button ref={tweetBtn} type="submit" className="prim-btn cursor">
+          Tweet
+        </button>
       </div>
     </form>
   )

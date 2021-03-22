@@ -29,7 +29,7 @@ const PasswordSettings = () => {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'X-CSRFToken': CSRF,
+        'X-CSRFToken': CSRF
       },
       credentials: 'same-origin',
       body: JSON.stringify(data)
@@ -39,24 +39,18 @@ const PasswordSettings = () => {
       .then(response => {
         clearFields()
 
-        if(response.status === 200) {
+        if([200, 400, 401].includes(response.status)) {
           return response.json()
-        }
-
-        if(response.status === 401) {
-          return response.json()
-        }
-
-        if(response.status === 400) {
-          return response.json()
-        }
-
-        else {
-          throw new Error()
         }
       })
       .then(data => {
-        console.log(data)
+        if(data.success) {
+          alert(data.success)
+        }
+
+        if(data.failure) {
+          alert(data.failure)
+        }
       })
       .catch(error => {
         console.log(error)

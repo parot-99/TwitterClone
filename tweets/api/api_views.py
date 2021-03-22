@@ -13,7 +13,8 @@ def tweet_create_view(request):
   
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response({}, status=status.HTTP_201_CREATED)
 
     return Response({}, status=status.HTTP_400_BAD_REQUEST)
 

@@ -12,7 +12,9 @@ from .serializers import (
     UserSerializer,
     CurrentUserSerializer,
     ProfileSerializer,
-    UsersSerializer
+    UsersSerializer,
+    FollowingSerializer,
+    FollowersSerializer
 )
 from profiles.models import Profile, FollowingRelation
 from tweets.models import Tweet
@@ -36,6 +38,9 @@ def user_detail_view(request, username):
         'profile_data': profile_serializer.data,
         'tweets_data': tweets_serializer.data
     }
+
+    for data, tweet in zip(tweets_serializer.data, tweets) :
+        data['isLiked'] =  request.user in tweet.likes.all()
     
     return Response(response_data, status=status.HTTP_200_OK)
 
@@ -81,6 +86,27 @@ def user_follow_view(request, username):
         from_profile.following.add(to_profile)
 
         return Response({'message': 'followed'}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def following_list_view(request, username):
+    profile = Profile.objects.get(user__username=username)
+    serializer = FollowingSerializer(profile)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def followers_list_view(request, username):
+    profile = Profile.objects.get(user__username=username)
+    serializer = FollowersSerializer(profile)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+
     
     
    

@@ -15,7 +15,6 @@ const LogoutallSettings = () => {
     const request = {
       method: 'POST',
       headers: {
-        Authorization: `Token ${localStorage.getItem('accessToken')}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'X-CSRFToken': CSRF,
@@ -62,14 +61,10 @@ const LogoutallSettings = () => {
     fetch(url, request)
       .then(response => {
         if(response.status === 200) {
-          localStorage.removeItem('accessToken')
           setIsAuthenticated(false)
           history.push('/')
         }
 
-        else {
-          throw new Error()
-        }
       })  
       .catch(error => console.log(error))
   }

@@ -5,8 +5,11 @@ const LikeBtn = (props) => {
   const {CSRF} = useContext(AuthContext)
   const [likes, setLikes] = useState(props.tweetLikes)
   const [isLiked, setIsLiked] = useState(props.isLiked)
+  const [isLoaded, setIsLoaded] = useState(true)
 
     const handleLike = (tweetId) => {
+      setIsLoaded(false)
+
       const url = `/api/tweets/${tweetId}/like/`
       const request = {
         method: 'POST',
@@ -23,6 +26,7 @@ const LikeBtn = (props) => {
           if(response.status === 200) {
             setIsLiked(!isLiked)
             isLiked? setLikes(likes - 1): setLikes(likes + 1) 
+            setIsLoaded(true)
           }
 
           else {
@@ -35,10 +39,11 @@ const LikeBtn = (props) => {
     }
 
   return (
-    <button onClick={() => handleLike(props.tweetId)} className="prim-btn tweet-container-item cursor">
-      {!isLiked && likes + ' likes'} 
-      {isLiked && likes + ' liked'} 
-    </button>
+    <button onDoubleClick={() => handleLike(props.tweetId)} onClick={() => handleLike(props.tweetId)} className="prim-btn tweet-container-item cursor">
+      {!isLoaded && <div className="btn-loader prim-btn"></div>}
+      {isLoaded && !isLiked && likes + ' likes'} 
+      {isLoaded && isLiked && likes + ' liked'} 
+    </button>  
   )
 }
 

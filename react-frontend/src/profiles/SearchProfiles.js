@@ -45,13 +45,21 @@ const SearchProfiles = () => {
         </div>
         <div className="form-item">
           <label htmlFor="id_username">Username</label>
-          <input type="text" name="username" id="id_username" required={true} autoComplete="off" onChange={e => {setUsername(e.target.value)}}/>
+          <input 
+            type="text" 
+            name="username" 
+            id="id_username" required={true} 
+            autoComplete="off" 
+            onChange={e => {setUsername(e.target.value)}}
+          />
         </div>
         <div></div>
       </header>
-      <section id="settings-list">
+      <section id="users-list">
         {user.map((user) => (
-          <Link key={user.id} to={`/profiles/${user.username}`}><h2>{user.username}</h2></Link>
+          <Link key={user.id} to={`/profiles/${user.username}`}>
+            <h2>{user.username}</h2>
+          </Link>
         ))}
       </section>
     </Fragment>

@@ -55,11 +55,11 @@ const Tweets = () => {
           <TweetCreate onTweetAdd={onTweetAdd} />
           {!isLoaded && <div className="loader"></div>}
           {error && <h1 className="message">Error</h1>}
-          {!error && 
+          {!error && isLoaded &&
             <section id="tweets-container">    
               {tweets.map((tweet) => (
                 <Tweet key={tweet.id} tweet={tweet} onTweetAdd={onTweetAdd} />
-                ))}
+              ))}
             </section>
           }
         </Route>

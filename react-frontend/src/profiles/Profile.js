@@ -66,7 +66,7 @@ const Profile = () => {
           <section id="profile-info">
             <header id="profile-header" className="flexed">
               <div id="profile-pic">
-                <img src={`${profileData.profile_pic}`} alt=""/>
+                <img src={`${profileData.profile_pic}`} alt="Not Found"/>
               </div>
               <h1>{profileData.tweets_count} Tweets</h1>
               {userData.is_current_user && 
@@ -90,8 +90,14 @@ const Profile = () => {
               <p className="light-text-color ">Born {profileData.birthday}</p>
             }
             <p className="light-text-color">
-          <span className="bolder"> {profileData.following_count} </span> Following 
-              <span className="bold"> {profileData.followers_count} </span>Followers
+              <span className="bold"> {profileData.following_count} </span>
+                <Link to={`/profiles/${userData.username}/following`}>
+                  Following
+                </Link>
+              <span className="bold"> {profileData.followers_count} </span>
+              <Link to={`/profiles/${userData.username}/followers`}>
+                Followers
+              </Link>
             </p>
           </section>
           <section id="tweets-container">    

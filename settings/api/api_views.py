@@ -9,7 +9,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.serializers import ValidationError as RestValidationError
-from profiles.api.serializers import ProfileSerializer
+from profiles.api.serializers import (
+    ProfileSerializer,
+    ProfileUpdateSerializer,
+    ProfileImageUpdateSerializer
+)
 
 
 @api_view(['PUT', 'GET'])
@@ -17,15 +21,23 @@ def profile_update_view(request):
     user = get_object_or_404(User, username=request.user.username)
 
     if request.method == 'GET':
-        serializer = ProfileSerializer(instance=user.profile)
+        serializer = ProfileUpdateSerializer(instance=user.profile)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'PUT':
-        serializer = ProfileSerializer(
-            instance=user.profile,
-            data=request.data
-        )
+        if 'profile_pic' not in request.data.keys():
+            serializer = ProfileUpdateSerializer(
+                instance=user.profile,
+                data=request.data
+            )
+
+        if 'profile_pic' in request.data.keys():
+            serializer = ProfileImageUpdateSerializer(
+                instance=user.profile,
+                data=request.data
+            )
+
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
@@ -50,9 +62,10 @@ def password_update_view(request):
     if authenticated_user is not None:
         try:
             validate_password(new_password)
+
         except ValidationError as error:
             return Response(
-                {'message': error},
+                {'failure': error},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
@@ -61,18 +74,18 @@ def password_update_view(request):
             user.save()
           
             return Response(
-                {'message': 'updated'},
+                {'success': 'password updated'},
                 status=status.HTTP_200_OK
             )
 
         else:
             return Response(
-                {'message': 'passwords did not match'},
+                {'failure': 'passwords did not match'},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
     return Response(
-        {'message': 'Wrong Password'},
+        {'failure': 'Wrong Password'},
         status=status.HTTP_400_BAD_REQUEST
     )
 
@@ -92,14 +105,15 @@ def email_update_view(request):
 
     if authenticated_user is None:
         return Response(
-            {'message': 'Wrong Password'},
+            {'failure': 'Wrong Password'},
             status=status.HTTP_400_BAD_REQUEST
         )
     
     if (email and User.objects.filter(email=email).exclude(username=username).exists()):
-            raise RestValidationError(
-                {'message': 'Email address must be unique.'}
-            )
+        return Response(
+            {'failure': 'Email address must be unique.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     setattr(user, 'email', email)
     user.save()

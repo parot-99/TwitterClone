@@ -29,6 +29,29 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_followers_count(self, obj):
         return obj.followers.count()
 
+
+class ProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            'bio',
+            'name',
+            'birthday',
+        ]
+
+
+class ProfileImageUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            'bio',
+            'name',
+            'birthday',
+            'profile_pic'
+        ]
+
+
+
 class UserSerializer(serializers.ModelSerializer):
     is_current_user = serializers.SerializerMethodField(read_only=True) 
     is_followed = serializers.SerializerMethodField(read_only=True)
@@ -90,4 +113,38 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     def get_date_joined(self, obj):
         return obj.date_joined
 
+
+
+class FollowingSerializer(serializers.ModelSerializer):
+    follow_list = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = [
+            'follow_list'
+        ]
+
+    def get_follow_list(self, obj):
+        following_list = [
+            following.user.username for following in obj.following.all()
+        ]
+
+        return following_list
+
+
+class FollowersSerializer(serializers.ModelSerializer):
+    follow_list = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = [
+            'follow_list'
+        ]
+
+    def get_follow_list(self, obj):
+        followers_list = [
+            followers.user.username for followers in obj.followers.all()
+        ]
+
+        return followers_list
 

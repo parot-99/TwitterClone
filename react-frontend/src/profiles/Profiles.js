@@ -1,8 +1,7 @@
 import React from 'react'
 import './Profiles.css'
 import {Switch, Route} from 'react-router-dom'
-import Profile from './Profile'
-import SearchProfiles from './SearchProfiles'
+import {Profile, SearchProfiles, FollowList} from '.'
 import {PageNotFound} from './../handlers'
 
 const Profiles = () => {
@@ -14,6 +13,12 @@ const Profiles = () => {
         </Route>
         <Route exact path='/profiles/:username'>
           <Profile />
+        </Route>
+        <Route exact path='/profiles/:username/following'>
+          <FollowList followType='following' />
+        </Route>
+        <Route exact path='/profiles/:username/followers'>
+          <FollowList followType='followers' />
         </Route>
         <Route>
           <PageNotFound name="home" to="/home" />

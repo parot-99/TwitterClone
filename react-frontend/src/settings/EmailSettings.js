@@ -36,21 +36,17 @@ const EmailSettings = () => {
       .then(response => {
         clearFields()
         
-        if([200, 401, 400].includes(response.status)) {
+        if ([200, 400].includes(response.status)) {
           return response.json()
-        }
-
-        else {
-          throw new Error()
         }
       })
       .then(data => {
-        if(data.message) {
-          alert(data.message)
-        }
-
         if(data.success) {
           alert(data.success)
+        }
+
+        if(data.failure) {
+          alert(data.failure)
         }
       })
       .catch(error => {
